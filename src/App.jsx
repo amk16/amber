@@ -9,6 +9,7 @@ import Capabilities from './components/Capabilities'
 import Process from './components/Process'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
+import Clarity from './experiments/Clarity'
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
@@ -41,11 +42,22 @@ const PALETTES = [
 
 export default function App() {
   const [palette, setPalette] = useState('obsidian')
+  const [hash, setHash] = useState(
+    typeof window !== 'undefined' ? window.location.hash : ''
+  )
   const root = useRef(null)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-palette', palette)
   }, [palette])
+
+  useEffect(() => {
+    const onHash = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  if (hash === '#/clarity') return <Clarity />
 
   // Global reveal on scroll
   useLayoutEffect(() => {
