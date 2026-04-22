@@ -16,6 +16,7 @@ export default function Footer() {
         </div>
 
         <nav className="flex flex-wrap gap-6 f-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: 'var(--text-dim)' }}>
+          <a href="#/precision" className="link-under" style={{ color: 'var(--accent)' }}>Precision ↗</a>
           <a href="#" className="link-under">Manifesto</a>
           <a href="#" className="link-under">Privacy</a>
           <a href="#" className="link-under">Terms</a>
