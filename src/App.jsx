@@ -10,6 +10,7 @@ import Process from './components/Process'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import Precision from './experiments/Precision'
+import Clarity from './experiments/Clarity'
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 
@@ -58,6 +59,7 @@ export default function App() {
   }, [])
 
   if (hash === '#/precision') return <Precision />
+  if (hash === '#/clarity') return <Clarity />
 
   // Global reveal on scroll
   useLayoutEffect(() => {
