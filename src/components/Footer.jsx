@@ -18,12 +18,9 @@ export default function Footer() {
           className="flex flex-wrap gap-6 f-mono text-[11px] uppercase tracking-[0.14em]"
           style={{ color: 'var(--text-dim)' }}
         >
-          <a href={`mailto:${SITE.email}`} className="link-under">Email</a>
+          <a href={`mailto:${SITE.email}`} className="link-under">{SITE.email}</a>
           <a href={SITE.linkedin} className="link-under" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a href={SITE.github} className="link-under" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
-
-        <span className="kicker">systems, not software licenses</span>
       </div>
     </footer>
   )

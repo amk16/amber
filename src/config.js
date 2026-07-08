@@ -2,9 +2,9 @@
 export const SITE = {
   name: 'Archon Systems',
   tagline: 'AI systems for businesses',
-  // TODO(ali): create a Cal.com/Calendly event and paste the URL
-  calendar: 'mailto:alimalik3162000@gmail.com?subject=Archon%20Systems%3A%2020%20minutes',
-  email: 'alimalik3162000@gmail.com',
-  linkedin: 'https://www.linkedin.com/', // TODO(ali): your profile URL
-  github: 'https://github.com/amk16',
+  // TODO: create the Cal.com/Calendly event and paste the URL
+  calendar: 'mailto:contact@archonsystems.com?subject=Archon%20Systems%3A%2020%20minutes',
+  // TODO: set up the studio mailbox before deploy (no personal accounts on the site)
+  email: 'contact@archonsystems.com',
+  linkedin: 'https://www.linkedin.com/', // TODO: studio page URL
 }

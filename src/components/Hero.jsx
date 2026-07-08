@@ -21,7 +21,7 @@ export default function Hero() {
         .from('[data-hero-cta]', { y: 16, opacity: 0, duration: 0.6, stagger: 0.08 }, '-=0.5')
         .from('[data-hero-fact]', { y: 24, opacity: 0, duration: 0.7, stagger: 0.1 }, '-=0.6')
 
-      // SVG schematic — animated flow paths
+      // schematic flow paths
       const paths = gsap.utils.toArray('[data-flow-path]')
       paths.forEach((p, i) => {
         const len = p.getTotalLength()
@@ -83,7 +83,7 @@ export default function Hero() {
       <div className="relative max-w-[1400px] mx-auto grid grid-cols-12 gap-6 pt-12">
         {/* LEFT: copy */}
         <div className="col-span-12 lg:col-span-7">
-          <div data-hero-kicker className="flex items-center gap-3 mb-8">
+          <div data-hero-kicker className="mb-8">
             <span className="chip">
               <span
                 className="inline-block w-1.5 h-1.5 rounded-full"
@@ -91,10 +91,9 @@ export default function Hero() {
               />
               Taking new clients · July 2026
             </span>
-            <span className="kicker hidden sm:inline">Assessment · 48 hours · yours either way</span>
           </div>
 
-          <h1 className="f-display" style={{ fontSize: 'clamp(40px, 5.9vw, 84px)' }}>
+          <h1 className="f-display" style={{ fontSize: 'clamp(40px, 5.6vw, 80px)' }}>
             <div data-hero-line className="block">
               <span className="split-word"><span>AI&nbsp;</span></span>
               <span className="split-word"><span>systems&nbsp;</span></span>
@@ -109,18 +108,18 @@ export default function Hero() {
             </div>
             <div data-hero-line className="block">
               <span className="split-word">
-                <span className="f-serif" style={{ color: 'var(--accent)' }}>retypes.</span>
+                <span style={{ color: 'var(--accent)' }}>retypes.</span>
               </span>
             </div>
           </h1>
 
           <p
             data-hero-sub
-            className="mt-8 max-w-[560px] text-[17px] leading-[1.55]"
+            className="mt-8 max-w-[540px] text-[17px] leading-[1.55]"
             style={{ color: 'var(--text-dim)' }}
           >
-            Intake, drafting, reporting, operations intelligence: built into the
-            workflow you already have. Production-grade. Fixed price.
+            Intake, drafting, and reporting handled inside the tools your firm
+            already uses. Fixed price. Live in weeks.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -135,7 +134,7 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Engagement facts — promises, not metrics */}
+          {/* Engagement terms */}
           <div
             className="mt-16 grid grid-cols-3 gap-0 border rounded-lg overflow-hidden"
             style={{ borderColor: 'var(--border)' }}
@@ -143,7 +142,7 @@ export default function Hero() {
             {[
               { v: '48h', k: 'written assessment after the first call' },
               { v: 'Fixed', k: 'price agreed before work starts' },
-              { v: '2–4 wks', k: 'typical build, end to end' },
+              { v: '2–4 wks', k: 'from kickoff to live' },
             ].map((s, i) => (
               <div
                 key={s.k}
@@ -155,12 +154,15 @@ export default function Hero() {
                 }}
               >
                 <div
-                  className="f-display text-[28px] md:text-[36px]"
-                  style={{ letterSpacing: '-0.03em' }}
+                  className="f-display text-[26px] md:text-[34px]"
+                  style={{ letterSpacing: '-0.02em' }}
                 >
                   {s.v}
                 </div>
-                <div className="kicker mt-2 normal-case tracking-[0.06em]" style={{ textTransform: 'none' }}>
+                <div
+                  className="mt-2 text-[12.5px] leading-snug"
+                  style={{ color: 'var(--text-dim)' }}
+                >
                   {s.k}
                 </div>
               </div>
@@ -180,22 +182,10 @@ export default function Hero() {
           >
             <div className="absolute inset-0 schematic-grid opacity-40" />
 
-            <div
-              className="absolute top-0 left-0 right-0 flex items-center justify-between px-4 py-3 border-b"
-              style={{ borderColor: 'var(--border)' }}
-            >
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} />
-                <span className="kicker">fig. 1 · a workflow, fixed</span>
-              </div>
-              <span className="kicker">schematic</span>
-            </div>
-
             <svg
               viewBox="0 0 400 520"
               className="absolute inset-0 w-full h-full"
               preserveAspectRatio="xMidYMid meet"
-              style={{ paddingTop: 40 }}
             >
               <g fontFamily="JetBrains Mono, monospace" fontSize="9" fill="var(--text-dim)">
                 <text x="24" y="72">WHAT ARRIVES</text>
@@ -230,12 +220,12 @@ export default function Hero() {
 
               <g data-node>
                 <rect
-                  x="150" y="200" width="100" height="80" rx="6"
+                  x="140" y="200" width="120" height="80" rx="6"
                   fill="var(--surface)" stroke="var(--border-strong)"
                 />
                 <text
                   x="200" y="236" textAnchor="middle"
-                  fontFamily="Syne, serif" fontSize="14" fill="var(--text)" fontWeight="600"
+                  fontFamily="Geist, sans-serif" fontSize="13" fill="var(--text)" fontWeight="600"
                 >
                   the system
                 </text>
@@ -251,30 +241,21 @@ export default function Hero() {
               </g>
 
               <g fill="none" stroke="var(--text-dim)" strokeWidth="1.1" opacity="0.55">
-                <path id="flow-1" data-flow-path d="M88 120 C 120 120, 140 220, 150 230" />
-                <path id="flow-2" data-flow-path d="M88 200 C 130 200, 140 230, 150 240" />
-                <path id="flow-3" data-flow-path d="M88 280 C 130 280, 140 250, 150 250" />
-                <path id="flow-4" data-flow-path d="M88 360 C 130 360, 140 260, 150 260" />
+                <path id="flow-1" data-flow-path d="M88 120 C 118 120, 130 220, 140 230" />
+                <path id="flow-2" data-flow-path d="M88 200 C 122 200, 130 230, 140 240" />
+                <path id="flow-3" data-flow-path d="M88 280 C 122 280, 130 250, 140 250" />
+                <path id="flow-4" data-flow-path d="M88 360 C 122 360, 130 260, 140 260" />
               </g>
               <g fill="none" stroke="var(--accent)" strokeWidth="1.2">
-                <path data-flow-path d="M250 230 C 280 230, 290 160, 312 160" />
-                <path data-flow-path d="M250 240 C 280 240, 290 240, 312 240" />
-                <path data-flow-path d="M250 260 C 280 260, 290 320, 312 320" />
+                <path data-flow-path d="M260 230 C 285 230, 292 160, 312 160" />
+                <path data-flow-path d="M260 240 C 285 240, 292 240, 312 240" />
+                <path data-flow-path d="M260 260 C 285 260, 292 320, 312 320" />
               </g>
 
               {[0, 1, 2, 3].map((i) => (
                 <circle key={i} data-pulse r="2.5" fill="var(--accent)" />
               ))}
             </svg>
-
-            <div
-              className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-2 border-t f-mono text-[10px]"
-              style={{ borderColor: 'var(--border)', color: 'var(--text-dim)' }}
-            >
-              <span>your data · your deployment</span>
-              <span>you own the system</span>
-              <span className="scroll-hint" style={{ color: 'var(--accent)' }}>▼ scroll</span>
-            </div>
           </div>
         </div>
       </div>

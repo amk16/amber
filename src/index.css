@@ -110,17 +110,15 @@ body::before {
 
 /* ---------------- TYPE SYSTEM ---------------- */
 .f-display {
-  font-family: "Syne", "Fraunces", serif;
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
+  font-family: "Geist", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
 }
 
+/* legacy alias: accent words render in the same clean face, accent color only */
 .f-serif {
-  font-family: "Fraunces", serif;
-  font-variation-settings: "opsz" 144;
-  font-style: italic;
-  letter-spacing: -0.02em;
+  font-style: normal;
 }
 
 .f-mono {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SITE } from '../config'
 
 export function ArchonMark({ size = 28 }) {
@@ -15,19 +15,6 @@ export function ArchonMark({ size = 28 }) {
 
 export default function Nav({ palettes, current, onChange }) {
   const [open, setOpen] = useState(false)
-  const [time, setTime] = useState('')
-
-  useEffect(() => {
-    const tick = () => {
-      const d = new Date()
-      const hh = String(d.getUTCHours()).padStart(2, '0')
-      const mm = String(d.getUTCMinutes()).padStart(2, '0')
-      setTime(`${hh}:${mm} UTC`)
-    }
-    tick()
-    const i = setInterval(tick, 30_000)
-    return () => clearInterval(i)
-  }, [])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -57,10 +44,6 @@ export default function Nav({ palettes, current, onChange }) {
         </nav>
 
         <div className="flex items-center gap-3 md:gap-5">
-          <span className="hidden md:inline f-mono text-[11px]" style={{ color: 'var(--text-dim)' }}>
-            {time}
-          </span>
-
           {/* Palette switcher — design-review tool; hide before production deploy */}
           <button
             onClick={() => setOpen((o) => !o)}

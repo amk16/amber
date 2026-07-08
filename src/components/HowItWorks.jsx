@@ -5,19 +5,19 @@ const STEPS = [
     n: '01',
     name: 'Assessment',
     time: '20-min call → 48 hours',
-    body: 'A short call about how your work actually flows. Within 48 hours you get a written assessment: what we’d fix, options sized to your firm, honest prices. Yours to keep either way.',
+    body: 'A short call about how your work flows today. Within 48 hours: a written assessment of what to fix, priced options, and our recommendation. Yours to keep either way.',
   },
   {
     n: '02',
     name: 'Build',
     time: '2–4 weeks',
-    body: 'One workflow, end-to-end. Fixed price agreed before we start. If it takes longer than planned, that’s our problem, not yours.',
+    body: 'One workflow, end to end. The price is fixed before we start. If it takes longer than planned, that cost is ours.',
   },
   {
     n: '03',
     name: 'Care',
     time: 'ongoing · first month included',
-    body: 'We host it, watch it, and sharpen it as your team’s real usage teaches us what matters.',
+    body: 'We host, monitor, and improve the system as your team uses it.',
   },
 ]
 
@@ -25,13 +25,9 @@ export default function HowItWorks() {
   return (
     <section id="how" className="relative px-6 md:px-10 py-28">
       <div className="max-w-[1400px] mx-auto">
-        <div data-reveal className="flex items-center justify-between mb-16 flex-wrap gap-4">
-          <span className="section-index">
-            <span className="led" />
-            §1 · How it works
-          </span>
-          <span className="kicker">three steps · no retainers required to start</span>
-        </div>
+        <h2 data-reveal className="f-display text-[clamp(28px,3.2vw,42px)] mb-16">
+          How it works
+        </h2>
 
         <div data-reveal-stagger className="grid grid-cols-1 md:grid-cols-3">
           {STEPS.map((s, i) => (
@@ -45,17 +41,14 @@ export default function HowItWorks() {
             >
               <div className="flex items-baseline justify-between mb-6">
                 <span
-                  className="f-display text-[64px] leading-none"
+                  className="f-display text-[56px] leading-none"
                   style={{ color: 'color-mix(in oklab, var(--text) 18%, transparent)' }}
                 >
                   {s.n}
                 </span>
                 <span className="kicker">{s.time}</span>
               </div>
-              <h3 className="f-display text-[28px] mb-4">
-                {s.name}
-                {i === 0 && <span className="f-serif" style={{ color: 'var(--accent)' }}>.</span>}
-              </h3>
+              <h3 className="f-display text-[26px] mb-4">{s.name}</h3>
               <p className="text-[15.5px] leading-[1.6] max-w-[40ch]" style={{ color: 'var(--text-dim)' }}>
                 {s.body}
               </p>
