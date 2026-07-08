@@ -162,6 +162,7 @@ body::before {
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
   gap: 10px;
   padding: 14px 22px;
   background: var(--accent);
@@ -261,9 +262,9 @@ body::before {
   vertical-align: bottom;
 }
 
+/* hidden state is applied by GSAP (fromTo), so text stays visible without JS */
 .split-word > span {
   display: inline-block;
-  transform: translateY(110%);
 }
 
 /* section number bar */
