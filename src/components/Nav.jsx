@@ -26,7 +26,7 @@ export default function Nav() {
         </nav>
 
         <a href={SITE.calendar} className="btn-primary !px-5 !py-3">
-          Book 20 minutes
+          Book a meeting
         </a>
       </div>
     </header>

@@ -38,13 +38,13 @@ export default function Proof() {
             className="f-display text-[clamp(2.5rem,5.4vw,4.6rem)] md:col-span-7"
             data-reveal
           >
-            The <em>record</em> to date.
+            In <em>practice</em>.
           </h2>
           <p
             className="body-copy self-end text-[16.5px] md:col-span-4 md:col-start-9"
             data-reveal
           >
-            Two engagements, side by side. Anonymized. Facts only.
+            Engagements from the studio, side by side. Anonymized. Facts only.
           </p>
         </div>
 

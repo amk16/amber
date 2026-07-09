@@ -1,6 +1,4 @@
 const SPECS = [
-  ['Builder', 'An engineer. Not no-code assembly.'],
-  ['Background', 'Production ML pipelines · robotics research · agent systems'],
   ['Data', 'Yours, in your own deployment.'],
   ['Ownership', 'You own your system.'],
   ['Billing', 'Fixed price. No hourly meter.'],
@@ -20,12 +18,13 @@ export default function Foundation() {
               className="f-display text-[clamp(2.5rem,5.4vw,4.6rem)]"
               data-reveal
             >
-              Built by an <em>engineer</em>.
+              Led and designed by <em>engineers</em>.
             </h2>
             <p className="body-copy mt-8 text-[16.5px]" data-reveal>
-              Archon Systems is engineering work, not no-code assembly. The
-              background behind it: production ML pipelines, robotics
-              research, agent systems. The rest is on the record, below.
+              Archon Systems is engineering work: system architecture,
+              honest value trade-offs, and user-centric design. The
+              background behind it spans production ML pipelines and agentic
+              scaling. The rest is set out below.
             </p>
           </div>
 
@@ -34,9 +33,9 @@ export default function Foundation() {
             data-reveal-stagger
           >
             {SPECS.map(([k, v]) => (
-              <div key={k} className="spec-row" data-reveal-child>
+              <div key={k} className="spec-row spec-row--lg" data-reveal-child>
                 <dt className="kicker">{k}</dt>
-                <dd className="m-0 text-[16.5px] leading-[1.5] text-[var(--text)]">
+                <dd className="f-serif m-0 text-[clamp(1.35rem,2.4vw,1.9rem)] leading-[1.3] text-[var(--text)]">
                   {v}
                 </dd>
               </div>

@@ -18,9 +18,9 @@ export default function Hero() {
           className="f-display mt-10 text-[clamp(3.4rem,10.5vw,9.25rem)]"
           data-reveal
         >
-          Your assessment
+          AI systems that do
           <br />
-          has <em>already</em> begun.
+          the work your team <em>retypes</em>.
         </h1>
 
         <div
@@ -38,7 +38,7 @@ export default function Hero() {
 
           <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-6">
             <a href={SITE.calendar} className="btn-primary">
-              Book 20 minutes <span className="arr" aria-hidden="true">→</span>
+              Book a meeting <span className="arr" aria-hidden="true">→</span>
             </a>
             <a href="#method" className="link-quiet whitespace-nowrap">
               Read the method
@@ -48,11 +48,14 @@ export default function Hero() {
 
         <div className="mt-16 md:mt-24" data-reveal>
           <div className="rule" />
-          <dl className="grid grid-cols-1 gap-x-10 gap-y-4 py-5 sm:grid-cols-3">
+          <dl className="grid grid-cols-1 gap-x-12 gap-y-9 py-9 sm:grid-cols-3 md:py-11">
             {META.map(([k, v]) => (
-              <div key={k} className="flex items-baseline gap-3">
-                <dt className="kicker shrink-0">{k}</dt>
-                <dd className="f-mono m-0 text-[11px] uppercase tracking-[0.1em] text-[var(--text)]">
+              <div
+                key={k}
+                className="flex flex-col gap-2.5 sm:border-l sm:border-[var(--rule)] sm:pl-10 sm:first:border-l-0 sm:first:pl-0"
+              >
+                <dt className="kicker">{k}</dt>
+                <dd className="f-serif m-0 text-[clamp(1.15rem,1.7vw,1.35rem)] leading-[1.3] text-[var(--text)]">
                   {v}
                 </dd>
               </div>

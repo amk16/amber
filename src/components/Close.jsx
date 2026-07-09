@@ -26,7 +26,7 @@ export default function Close() {
 
           <div className="flex shrink-0 flex-col items-start gap-6 md:items-end">
             <a href={SITE.calendar} className="btn-primary">
-              Book 20 minutes <span className="arr" aria-hidden="true">→</span>
+              Book a meeting <span className="arr" aria-hidden="true">→</span>
             </a>
             <a href={`mailto:${SITE.email}`} className="link-quiet">
               or write: {SITE.email}
