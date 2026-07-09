@@ -33,6 +33,37 @@ export default function Close() {
             </a>
           </div>
         </div>
+
+        {/* The billboard — grafted from variant/instrument, re-set in the
+            Ledger's voice: the nameplate at full measure, ink on paper,
+            masthead serif. No sweep; the flip stays the only set-piece. */}
+        <div className="mt-28 md:mt-40" data-reveal>
+          <div className="flex items-baseline justify-between gap-6 pb-3">
+            <span className="kicker">Archon Systems</span>
+            <span className="kicker hidden sm:inline">
+              AI systems for businesses
+            </span>
+          </div>
+          <div className="rule" />
+          <div className="mt-6 md:mt-9" aria-hidden="true">
+            <svg
+              viewBox="0 0 1200 148"
+              className="block h-auto w-full"
+              preserveAspectRatio="xMidYMax meet"
+            >
+              <text
+                x="600"
+                y="143"
+                textAnchor="middle"
+                textLength="1192"
+                lengthAdjust="spacingAndGlyphs"
+                className="wordmark-text"
+              >
+                ARCHON
+              </text>
+            </svg>
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -237,6 +237,18 @@ body::before {
   background: var(--surface);
 }
 
+/* the close's billboard wordmark — grafted from variant/instrument's
+   viewport-wide ARCHON, re-cut here as a broadsheet masthead: Newsreader
+   caps, ledger ink, no accent spent. */
+.wordmark-text {
+  font-family: "Newsreader", "Iowan Old Style", Georgia, serif;
+  font-optical-sizing: auto;
+  font-weight: 470;
+  font-size: 196px;
+  letter-spacing: 0.01em;
+  fill: var(--text);
+}
+
 /* ledger row: index number · body · marginal annotation */
 .ledger-row {
   display: grid;
