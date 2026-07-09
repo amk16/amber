@@ -31,5 +31,5 @@ Reference class: the best small independent dev-studio sites (instrument.com-tie
 
 1. Calendar CTA is the only conversion goal; it appears in nav, hero, and closing section.
 2. Every claim on the page must be true today. The site earns trust it cannot afford to lose.
-3. Single scroll, five sections: hero → how it works → recent work → foundation → close.
-4. Design register is brand, but restraint IS the brand: committed color, quiet motion, no spectacle.
+3. Single scroll, four-beat arc — hook → shift → proof → ask — across five sections: hero → method (how it works) → recent work → foundation → close. _(Superseded 2026-07-09 by the Ledger direction: "recent work" and "foundation" now sit inside one dark proof chapter, and the site is typeset as the written assessment it sells. See `DESIGN.md`.)_
+4. Design register is brand, but restraint IS the brand: committed color, quiet motion, one set-piece. _(Ledger direction: the single set-piece is the mid-page theme flip to a dark proof chapter — not a workflow schematic. Committed oxblood accent, ≤15% of surface.)_
