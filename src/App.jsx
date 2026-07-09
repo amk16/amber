@@ -1,114 +1,124 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
-import HowItWorks from './components/HowItWorks'
-import Work from './components/Work'
+import Method from './components/Method'
+import Proof from './components/Proof'
 import Foundation from './components/Foundation'
-import CTA from './components/CTA'
+import Close from './components/Close'
 import Footer from './components/Footer'
-import Precision from './experiments/Precision'
-import Clarity from './experiments/Clarity'
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, MotionPathPlugin)
-
-const PALETTES = [
-  {
-    id: 'paper',
-    name: 'Paper',
-    desc: 'Warm cream + rust',
-    swatch: ['#eee8da', '#cfc7b2', '#c2410c', '#161512'],
-  },
-  {
-    id: 'obsidian',
-    name: 'Obsidian',
-    desc: 'Carbon + electric lime',
-    swatch: ['#0a0a0a', '#232323', '#d4ff3a', '#f3f2ec'],
-  },
-  {
-    id: 'cobalt',
-    name: 'Cobalt',
-    desc: 'Deep navy + mint',
-    swatch: ['#080d1c', '#1c2a4d', '#5eead4', '#e6ecfb'],
-  },
-  {
-    id: 'terminal',
-    name: 'Terminal',
-    desc: 'Pure black + green',
-    swatch: ['#020502', '#14281a', '#39ff88', '#d5f5d8'],
-  },
-]
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function App() {
-  const [palette, setPalette] = useState('paper')
-  const [hash, setHash] = useState(
-    typeof window !== 'undefined' ? window.location.hash : ''
-  )
   const root = useRef(null)
-  const isExperiment = hash === '#/precision' || hash === '#/clarity'
+  const chapter = useRef(null)
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-palette', palette)
-  }, [palette])
-
-  useEffect(() => {
-    const onHash = () => setHash(window.location.hash)
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [])
-
-  // Global reveal on scroll (hooks stay above the experiment early-return)
   useGSAP(
     () => {
-      if (isExperiment) return
-      gsap.utils.toArray('[data-reveal]').forEach((el) => {
-        gsap.from(el, {
-          y: 40,
-          opacity: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            once: true,
-          },
-        })
+      // Nav ink flips over the dark chapter. An instant attribute swap,
+      // not motion: it runs regardless of prefers-reduced-motion.
+      const nav = root.current.querySelector('.site-nav')
+      ScrollTrigger.create({
+        trigger: chapter.current,
+        start: 'top 44px',
+        end: 'bottom 44px',
+        onToggle: (self) =>
+          nav.setAttribute('data-ink', self.isActive ? 'dark' : 'light'),
       })
 
-      gsap.utils.toArray('[data-reveal-stagger]').forEach((parent) => {
-        const kids = parent.querySelectorAll('[data-reveal-child]')
-        gsap.from(kids, {
-          y: 32,
-          opacity: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-          stagger: 0.08,
+      // Newsreader loads late enough to move trigger positions; re-measure.
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(() => ScrollTrigger.refresh())
+      }
+
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // Quiet reveals: rise ≤ 24px, once. Above-the-fold elements get a
+        // small cascade so the first paint reads as typesetting, not a pop.
+        let foldIndex = 0
+        gsap.utils.toArray('[data-reveal]').forEach((el) => {
+          const inFold =
+            el.getBoundingClientRect().top < window.innerHeight * 0.85
+          gsap.from(el, {
+            y: 24,
+            autoAlpha: 0,
+            duration: 0.9,
+            ease: 'power2.out',
+            delay: inFold ? 0.12 * foldIndex++ : 0,
+            scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+          })
+        })
+
+        gsap.utils.toArray('[data-reveal-stagger]').forEach((parent) => {
+          gsap.from(parent.querySelectorAll('[data-reveal-child]'), {
+            y: 20,
+            autoAlpha: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            stagger: 0.09,
+            scrollTrigger: { trigger: parent, start: 'top 82%', once: true },
+          })
+        })
+
+        // THE SET-PIECE — the flip. The proof chapter's ground crossfades
+        // from paper to dark ink as it enters, and back as it leaves.
+        // The chapter is statically dark in CSS, so without this tween
+        // (no JS, reduced motion) the page is complete and still flips.
+        const cs = getComputedStyle(document.documentElement)
+        const v = (name) => cs.getPropertyValue(name).trim()
+        const paper = {
+          '--ch-bg': v('--bg'),
+          '--ch-text': v('--text'),
+          '--ch-dim': v('--text-dim'),
+          '--ch-rule': v('--rule'),
+        }
+        const ink = {
+          '--ch-bg': v('--flip-bg'),
+          '--ch-text': v('--flip-text'),
+          '--ch-dim': v('--flip-dim'),
+          '--ch-rule': v('--flip-rule'),
+        }
+
+        gsap.fromTo(chapter.current, paper, {
+          ...ink,
+          ease: 'none',
           scrollTrigger: {
-            trigger: parent,
-            start: 'top 80%',
-            once: true,
+            trigger: chapter.current,
+            start: 'top 75%',
+            end: 'top 25%',
+            scrub: true,
+          },
+        })
+        gsap.fromTo(chapter.current, ink, {
+          ...paper,
+          ease: 'none',
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: chapter.current,
+            start: 'bottom 75%',
+            end: 'bottom 25%',
+            scrub: true,
           },
         })
       })
     },
-    { scope: root, dependencies: [isExperiment], revertOnUpdate: true }
+    { scope: root }
   )
 
-  if (hash === '#/precision') return <Precision />
-  if (hash === '#/clarity') return <Clarity />
-
   return (
-    <div ref={root} className="min-h-screen">
-      <Nav palettes={PALETTES} current={palette} onChange={setPalette} />
+    <div ref={root}>
+      <Nav />
       <main>
         <Hero />
-        <HowItWorks />
-        <Work />
-        <Foundation />
-        <CTA />
+        <Method />
+        <div ref={chapter} className="chapter-dark">
+          <Proof />
+          <Foundation />
+        </div>
+        <Close />
       </main>
       <Footer />
     </div>
