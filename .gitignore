@@ -22,4 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-review/
+.superpowers/
+review/archive-paper-2026-07-08/
