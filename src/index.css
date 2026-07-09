@@ -274,29 +274,6 @@ body::before {
   }
 }
 
-/* proof entry: file column · record column */
-.entry {
-  display: grid;
-  grid-template-columns: minmax(200px, 300px) minmax(0, 1fr);
-  gap: clamp(28px, 5vw, 72px);
-  border-top: 1px solid var(--rule);
-  padding: clamp(36px, 5vw, 56px) 0;
-}
-
-@media (max-width: 768px) {
-  .entry {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-}
-
-.entry-line {
-  display: grid;
-  grid-template-columns: 76px minmax(0, 1fr);
-  gap: 20px;
-  align-items: baseline;
-}
-
 /* spec list (foundation) */
 .spec-row {
   display: grid;
