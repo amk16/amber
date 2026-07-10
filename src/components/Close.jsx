@@ -3,15 +3,15 @@ import { SITE } from '../config'
 const STEPS = [
   [
     'We look',
-    'We map how your work actually flows — and find where the same information gets handled twice.',
+    'We map how your work actually flows — and find where intelligent systems can help.',
   ],
   [
-    'You hear it straight',
-    'Whether a system is worth building for you, and roughly what it would take. No pitch in the room.',
+    'We prioritize',
+    'Which workflows are worth automating first, and which to leave alone.',
   ],
   [
-    'You keep it',
-    'Within 48 hours it’s in writing: what we’d fix, options sized to your firm, honest prices. Yours either way.',
+    'A clear deliverable',
+    'Within 48 hours, a phase-by-phase plan to supercharge your systems.',
   ],
 ]
 
@@ -27,7 +27,7 @@ export default function Close() {
           className="f-display mt-10 max-w-[16ch] text-[clamp(3rem,8vw,7.25rem)]"
           data-reveal
         >
-          Twenty minutes. A straight <em>answer</em>.
+          Twenty minutes to evaluate your <em>needs</em>.
         </h2>
 
         <div
