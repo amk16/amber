@@ -11,8 +11,8 @@ const ENTRIES = [
     client: 'A specialist law firm.',
     outcome: 'Lawyers review the draft — they don’t build it.',
     body:
-      'It drafts contracts to a recognized professional standard, then self-edits: a deterministic linter catches bright-line errors on every pass, and a judgment checklist handles what rules can’t. Each edit cites its source, and a lawyer owns the sign-off.',
-    chips: ['Drafts to standard', 'Self-editing linter', 'Every edit cited'],
+      'The first draft arrives already conformed to standard, having quietly checked its own work first. What’s left for the lawyer is judgment, not assembly.',
+    chips: ['Conformed to standard', 'Checks its own work', 'Cited throughout'],
   },
   {
     no: 'No. 002',
@@ -20,8 +20,8 @@ const ENTRIES = [
     client: 'The CEO of a marketing agency.',
     outcome: 'A decision-ready brief every week — with no research staff.',
     body:
-      'A pipeline sweeps a tiered network of industry sources, drops anything seen before, and deep-reads what’s left into a private brief — every item sourced, plain-language, with a one-line “why it matters.” It can run and publish itself, unattended.',
-    chips: ['Deduped against history', 'Every item sourced', 'Runs unattended'],
+      'A whole landscape of sources, read and distilled into a single private brief — the signal, without the search. It keeps itself current, and arrives without anyone lifting a finger.',
+    chips: ['Signal, not noise', 'Self-updating', 'Runs unattended'],
   },
 ]
 
