@@ -27,7 +27,7 @@ export default function Close() {
           className="f-display mt-10 max-w-[16ch] text-[clamp(3rem,8vw,7.25rem)]"
           data-reveal
         >
-          Twenty minutes to evaluate your <em>needs</em>.
+          A single meeting to evaluate your <em>needs</em>.
         </h2>
 
         <div
