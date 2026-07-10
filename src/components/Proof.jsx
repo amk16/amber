@@ -38,7 +38,7 @@ export default function Proof() {
             className="f-display text-[clamp(2.5rem,5.4vw,4.6rem)] md:col-span-7"
             data-reveal
           >
-            In <em>practice</em>.
+            Intelligent Systems in <em>Practice</em>.
           </h2>
           <p
             className="body-copy self-end text-[16.5px] md:col-span-4 md:col-start-9"
