@@ -1,4 +1,4 @@
-import { SITE } from '../config'
+import { useIntake } from '../intake/IntakeContext'
 
 const LINKS = [
   { href: '#method', label: 'Method' },
@@ -7,6 +7,7 @@ const LINKS = [
 ]
 
 export default function Nav() {
+  const { open } = useIntake()
   return (
     <header className="site-nav fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-6 py-4 md:px-10">
@@ -25,9 +26,9 @@ export default function Nav() {
           ))}
         </nav>
 
-        <a href={SITE.calendar} className="btn-primary !px-5 !py-3">
+        <button type="button" onClick={open} className="btn-primary !px-5 !py-3">
           Book a meeting
-        </a>
+        </button>
       </div>
     </header>
   )

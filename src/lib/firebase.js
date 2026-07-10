@@ -6,11 +6,6 @@ import {
   connectFirestoreEmulator,
   persistentLocalCache,
 } from 'firebase/firestore'
-import {
-  getAuth,
-  GoogleAuthProvider,
-  connectAuthEmulator,
-} from 'firebase/auth'
 
 // Config comes from Vite env (VITE_FIREBASE_*). Firebase web keys are public by
 // design (they identify the project; security lives in firestore.rules), so the
@@ -27,19 +22,15 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig)
 
-const USE_EMULATOR = import.meta.env.VITE_USE_EMULATOR === 'true'
+export const USE_EMULATOR = import.meta.env.VITE_USE_EMULATOR === 'true'
 
 // Offline cache serves cached reads instantly and rides out flaky connections.
 export const db = USE_EMULATOR
   ? getFirestore(app)
   : initializeFirestore(app, { localCache: persistentLocalCache() })
 
-export const auth = getAuth(app)
-export const googleProvider = new GoogleAuthProvider()
-
 if (USE_EMULATOR) {
   connectFirestoreEmulator(db, '127.0.0.1', 8080)
-  connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true })
 }
 
 // App Check is the abuse gate for the public (no-auth) create path. Only

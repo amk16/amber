@@ -1,4 +1,4 @@
-import { SITE } from '../config'
+import { useIntake } from '../intake/IntakeContext'
 
 const META = [
   ['Price', 'Fixed, agreed before work starts'],
@@ -7,6 +7,7 @@ const META = [
 ]
 
 export default function Hero() {
+  const { open } = useIntake()
   return (
     <section id="top" className="px-6 pt-36 md:px-10 md:pt-44">
       <div className="mx-auto max-w-[1200px]">
@@ -37,9 +38,9 @@ export default function Hero() {
           </p>
 
           <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-6">
-            <a href={SITE.calendar} className="btn-primary">
+            <button type="button" onClick={open} className="btn-primary">
               Book a meeting <span className="arr" aria-hidden="true">→</span>
-            </a>
+            </button>
             <a href="#method" className="link-quiet whitespace-nowrap">
               Read the method
             </a>

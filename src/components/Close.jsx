@@ -1,4 +1,5 @@
 import { SITE } from '../config'
+import { useIntake } from '../intake/IntakeContext'
 
 const STEPS = [
   [
@@ -16,6 +17,7 @@ const STEPS = [
 ]
 
 export default function Close() {
+  const { open } = useIntake()
   return (
     <section id="close" className="px-6 py-32 md:px-10 md:py-48">
       <div className="mx-auto max-w-[1200px]">
@@ -51,9 +53,9 @@ export default function Close() {
           </ol>
 
           <div className="flex flex-col items-start gap-6 self-end md:col-span-4 md:col-start-9 md:items-end">
-            <a href={SITE.calendar} className="btn-primary">
+            <button type="button" onClick={open} className="btn-primary">
               Book a meeting <span className="arr" aria-hidden="true">→</span>
-            </a>
+            </button>
             <a href={`mailto:${SITE.email}`} className="link-quiet">
               or write: {SITE.email}
             </a>

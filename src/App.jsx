@@ -9,6 +9,8 @@ import Proof from './components/Proof'
 import Foundation from './components/Foundation'
 import Close from './components/Close'
 import Footer from './components/Footer'
+import IntakeModal from './components/IntakeModal'
+import { IntakeProvider } from './intake/IntakeContext'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
@@ -109,18 +111,21 @@ export default function App() {
   )
 
   return (
-    <div ref={root}>
-      <Nav />
-      <main>
-        <Hero />
-        <Method />
-        <div ref={chapter} className="chapter-dark">
-          <Proof />
-          <Foundation />
-        </div>
-        <Close />
-      </main>
-      <Footer />
-    </div>
+    <IntakeProvider>
+      <div ref={root}>
+        <Nav />
+        <main>
+          <Hero />
+          <Method />
+          <div ref={chapter} className="chapter-dark">
+            <Proof />
+            <Foundation />
+          </div>
+          <Close />
+        </main>
+        <Footer />
+      </div>
+      <IntakeModal />
+    </IntakeProvider>
   )
 }
