@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Secrets / Firebase local state — never commit
+.env
+.env.*
+!.env.example
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,0 +1,55 @@
+rules_version = '2';
+
+// Security model for Archon Systems intake:
+//   • The PUBLIC may only CREATE an inquiry, and only a well-formed one that
+//     starts at stage 'new'. Every field's type and size is validated — the
+//     only thing between a bot and garbage/oversized data (App Check, enforced
+//     in the console, additionally blocks non-browser abuse).
+//   • READS, LISTS, and UPDATES are restricted to the OWNER. Inquiries hold
+//     contact PII; even though the ops dashboard is never deployed, Firestore
+//     is cloud-hosted, so reads MUST be gated. The owner signs in with Google.
+//   • No hard deletes. The append-only `events` log is owner-only.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ⇩ Set this to the Google account that runs the ops dashboard.
+    function ownerEmail() { return 'alimalik3162000@gmail.com'; }
+
+    function isOwner() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email == ownerEmail();
+    }
+
+    function neStr(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
+    function str(v, max)   { return v is string && v.size() <= max; }
+    function isNow(v)      { return v is timestamp && v == request.time; }
+
+    function validInquiry(d) {
+      return d.keys().hasOnly(['name','email','firm','firmSize','message',
+                               'stage','source','createdAt','updatedAt'])
+        && neStr(d.name, 120)
+        && neStr(d.email, 200) && d.email.matches('.+@.+\\..+')
+        && neStr(d.firm, 160)
+        && str(d.firmSize, 20)
+        && neStr(d.message, 4000)
+        && d.stage == 'new'
+        && d.source == 'website'
+        && isNow(d.createdAt)
+        && isNow(d.updatedAt);
+    }
+
+    match /inquiries/{inquiryId} {
+      allow create: if validInquiry(request.resource.data);
+      allow get, list, update: if isOwner();
+      allow delete: if false;
+
+      // Append-only log of stage changes and owner notes. Owner-only.
+      match /events/{eventId} {
+        allow read, list, create: if isOwner();
+        allow update, delete: if false;
+      }
+    }
+  }
+}
