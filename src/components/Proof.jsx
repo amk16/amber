@@ -8,11 +8,11 @@ const ENTRIES = [
   {
     no: 'No. 001',
     field: 'Legal',
-    client: 'A law firm handling hospital matters.',
-    outcome: 'Associates shape drafts now, instead of assembling them.',
+    client: 'A specialist law firm.',
+    outcome: 'Lawyers review the draft — they don’t build it.',
     body:
-      'Afternoons went to assembling reply drafts from precedent files. The system drafts from the case record; associates review and shape, and every draft keeps a clean file trail.',
-    chips: ['Drafts from the case record', 'Clean file trail', 'Shape, not assemble'],
+      'It drafts contracts to a recognized professional standard, then self-edits: a deterministic linter catches bright-line errors on every pass, and a judgment checklist handles what rules can’t. Each edit cites its source, and a lawyer owns the sign-off.',
+    chips: ['Drafts to standard', 'Self-editing linter', 'Every edit cited'],
   },
   {
     no: 'No. 002',
@@ -20,8 +20,8 @@ const ENTRIES = [
     client: 'The CEO of a marketing agency.',
     outcome: 'A decision-ready brief every week — with no research staff.',
     body:
-      'Clients ask about AI developments, and staying ahead of them was a job in itself. A weekly pipeline reads the landscape and writes a private, decision-ready brief.',
-    chips: ['Weekly cadence', 'Decision-ready', 'No research staff'],
+      'A pipeline sweeps a tiered network of industry sources, drops anything seen before, and deep-reads what’s left into a private brief — every item sourced, plain-language, with a one-line “why it matters.” It can run and publish itself, unattended.',
+    chips: ['Deduped against history', 'Every item sourced', 'Runs unattended'],
   },
 ]
 
