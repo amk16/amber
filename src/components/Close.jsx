@@ -1,30 +1,56 @@
 import { SITE } from '../config'
 
+const STEPS = [
+  [
+    'We look',
+    'We map how your work actually flows — and find where the same information gets handled twice.',
+  ],
+  [
+    'You hear it straight',
+    'Whether a system is worth building for you, and roughly what it would take. No pitch in the room.',
+  ],
+  [
+    'You keep it',
+    'Within 48 hours it’s in writing: what we’d fix, options sized to your firm, honest prices. Yours either way.',
+  ],
+]
+
 export default function Close() {
   return (
     <section id="close" className="px-6 py-32 md:px-10 md:py-48">
       <div className="mx-auto max-w-[1200px]">
         <p className="kicker" data-reveal>
-          <b>C/01</b>&ensp;—&ensp;The ask
+          <b>C/01</b>&ensp;—&ensp;The first meeting
         </p>
 
         <h2
-          className="f-display mt-10 max-w-[14ch] text-[clamp(3rem,8vw,7.25rem)]"
+          className="f-display mt-10 max-w-[16ch] text-[clamp(3rem,8vw,7.25rem)]"
           data-reveal
         >
-          Twenty minutes. Then it’s in <em>writing</em>.
+          Twenty minutes. A straight <em>answer</em>.
         </h2>
 
         <div
-          className="mt-14 flex flex-col gap-10 md:mt-20 md:flex-row md:items-end md:justify-between"
+          className="mt-14 grid grid-cols-1 gap-12 md:mt-20 md:grid-cols-12 md:gap-6"
           data-reveal
         >
-          <p className="body-copy text-[17px] md:max-w-[46ch]">
-            One call. A written assessment within 48 hours, yours to keep
-            either way. The price is fixed before any build begins.
-          </p>
+          <ol className="m-0 list-none p-0 md:col-span-7" data-reveal-stagger>
+            {STEPS.map(([lead, body], i) => (
+              <li key={lead} className="ledger-row" data-reveal-child>
+                <span className="f-mono text-[13px] tracking-[0.08em] text-[var(--accent-display)]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <p className="m-0 max-w-[52ch] text-[17px] leading-[1.55]">
+                  <span className="f-serif text-[21px] text-[var(--text)]">
+                    {lead}.
+                  </span>{' '}
+                  <span className="text-[var(--text-dim)]">{body}</span>
+                </p>
+              </li>
+            ))}
+          </ol>
 
-          <div className="flex shrink-0 flex-col items-start gap-6 md:items-end">
+          <div className="flex flex-col items-start gap-6 self-end md:col-span-4 md:col-start-9 md:items-end">
             <a href={SITE.calendar} className="btn-primary">
               Book a meeting <span className="arr" aria-hidden="true">→</span>
             </a>
