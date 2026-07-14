@@ -33,3 +33,4 @@ firestore-debug.log
 .superpowers/
 review/archive-paper-2026-07-08/
 review/palette-*.png
+.vercel
