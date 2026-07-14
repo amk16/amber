@@ -56,9 +56,11 @@ export default function Close() {
             <button type="button" onClick={open} className="btn-primary">
               Book a meeting <span className="arr" aria-hidden="true">→</span>
             </button>
-            <a href={`mailto:${SITE.email}`} className="link-quiet">
-              or write: {SITE.email}
-            </a>
+            {SITE.email && (
+              <a href={`mailto:${SITE.email}`} className="link-quiet">
+                or write: {SITE.email}
+              </a>
+            )}
           </div>
         </div>
 
