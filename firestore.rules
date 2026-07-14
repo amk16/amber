@@ -26,16 +26,19 @@ service cloud.firestore {
     function str(v, max)   { return v is string && v.size() <= max; }
     function isNow(v)      { return v is timestamp && v == request.time; }
 
+    // Two public create paths share the collection: the studio site
+    // ('website', requires name + firm) and The Lab portfolio's contact
+    // forms ('portfolio', email + message only — name/firm may be empty).
     function validInquiry(d) {
       return d.keys().hasOnly(['name','email','firm','firmSize','message',
                                'stage','source','createdAt','updatedAt'])
-        && neStr(d.name, 120)
+        && (d.source == 'website' || d.source == 'portfolio')
+        && (d.source == 'portfolio' ? str(d.name, 120) : neStr(d.name, 120))
         && neStr(d.email, 200) && d.email.matches('.+@.+\\..+')
-        && neStr(d.firm, 160)
+        && (d.source == 'portfolio' ? str(d.firm, 160) : neStr(d.firm, 160))
         && str(d.firmSize, 20)
         && neStr(d.message, 4000)
         && d.stage == 'new'
-        && d.source == 'website'
         && isNow(d.createdAt)
         && isNow(d.updatedAt);
     }
