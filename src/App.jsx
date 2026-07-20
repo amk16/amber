@@ -105,6 +105,41 @@ export default function App() {
             scrub: true,
           },
         })
+
+        // The cover-slip (amendment 2026-07-21) — the one scripted moment
+        // beside the flip, and subordinate to it: the Close header arrives
+        // covered by a slip of the chapter's ink asking the question, holds
+        // a beat, then slides off right to reveal the ask. Once, on enter.
+        // The slip is visibility:hidden in CSS, so without this tween the
+        // header simply stands uncovered.
+        const slip = root.current.querySelector('[data-cover-slip]')
+        if (slip) {
+          gsap.set(slip, { autoAlpha: 1 })
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: '[data-cover-wrap]',
+                start: 'top 72%',
+                once: true,
+              },
+            })
+            .to(slip, {
+              xPercent: 101,
+              duration: 0.9,
+              ease: 'power3.inOut',
+              delay: 0.35,
+            })
+            .to(
+              slip.firstElementChild,
+              { xPercent: -10, duration: 0.9, ease: 'power3.inOut' },
+              '<'
+            )
+            .from(
+              '[data-cover-under]',
+              { y: 14, duration: 0.6, ease: 'power2.out' },
+              '-=0.4'
+            )
+        }
       })
     },
     { scope: root }

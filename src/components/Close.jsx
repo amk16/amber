@@ -25,12 +25,21 @@ export default function Close() {
           <b>C/01</b>&ensp;—&ensp;The first meeting
         </p>
 
-        <h2
-          className="f-display mt-10 max-w-[16ch] text-[clamp(3rem,8vw,7.25rem)]"
-          data-reveal
-        >
-          A single meeting to evaluate your <em>needs</em>.
-        </h2>
+        {/* The header arrives covered by the slip; the wipe uncovers it.
+            No data-reveal here: the cover-slip choreography owns this block. */}
+        <div className="relative mt-10 overflow-hidden" data-cover-wrap>
+          <h2
+            className="f-display max-w-[16ch] text-[clamp(3rem,8vw,7.25rem)]"
+            data-cover-under
+          >
+            A single meeting to evaluate your <em>needs</em>.
+          </h2>
+          <div className="cover-slip" data-cover-slip aria-hidden="true">
+            <span className="f-display text-[clamp(2.4rem,6.2vw,5.6rem)]">
+              Where Do We <em>Begin</em>?
+            </span>
+          </div>
+        </div>
 
         <div
           className="mt-14 grid grid-cols-1 gap-12 md:mt-20 md:grid-cols-12 md:gap-6"

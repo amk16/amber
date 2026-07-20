@@ -505,3 +505,22 @@ body::before {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* The cover-slip — the Close header's one scripted moment beside the flip
+   (amendment 2026-07-21). A slip of chapter ink covering the ask, asking the
+   question first; GSAP slides it off right. Hidden by default so the no-JS /
+   reduced-motion page stays a complete static document. */
+.cover-slip {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  background: var(--flip-bg);
+  color: var(--flip-text);
+  visibility: hidden;
+  will-change: transform;
+}
+.cover-slip em {
+  color: #b5786d; /* oxblood lifted for ink ground — matches .chapter-dark */
+}

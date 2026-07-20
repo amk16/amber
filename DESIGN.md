@@ -54,7 +54,7 @@ reduced-motion the page is complete and still reads as a dark chapter.
 ## Motion rules
 
 - GSAP + ScrollTrigger. Reveals: rise ≤24px, `autoAlpha`, `power2.out`, `once`. Above-fold gets a small typeset cascade.
-- The flip is the only set-piece. No bounce/elastic; no layout-property animation.
+- The flip is the page's set-piece. One subordinate scripted moment (amendment 2026-07-21): the **Close cover-slip**, a slip of chapter ink over the ask's header reading "Where Do We Begin?", which holds a beat and slides off right (power3.inOut, 0.9s, once, slight text drag). Flip tokens only; `visibility:hidden` in CSS so the static page is complete. Nothing else gets choreography. No bounce/elastic; no layout-property animation.
 - All reveals + the flip tween live inside `matchMedia('(prefers-reduced-motion: no-preference)')` — under **reduced motion nothing runs and the page is a complete static document** (dark chapter still dark, all content visible).
 
 ## The two grafts (2026-07)
