@@ -4,18 +4,12 @@
    the ledger-entry numbering identity. Cards use the generic tokens so the dark
    chapter's paper→ink flip crossfades them; they stack to one column at 390px. */
 
+/* Truth amendment 2026-07-20: the legal-drafting entry removed — that engagement
+   is still in discovery, and this ledger records only shipped systems (honesty
+   rule, PRODUCT.md). It returns as its own entry the day it ships. */
 const ENTRIES = [
   {
     no: 'No. 001',
-    field: 'Legal',
-    client: 'A specialist law firm.',
-    outcome: 'Lawyers review the draft — they don’t build it.',
-    body:
-      'The first draft arrives already conformed to standard, having quietly checked its own work first. What’s left for the lawyer is judgment, not assembly.',
-    chips: ['Conformed to standard', 'Checks its own work', 'Cited throughout'],
-  },
-  {
-    no: 'No. 002',
     field: 'Agency',
     client: 'The CEO of a marketing agency.',
     outcome: 'A decision-ready brief every week — with no research staff.',
@@ -44,13 +38,14 @@ export default function Proof() {
             className="body-copy self-end text-[16.5px] md:col-span-4 md:col-start-9"
             data-reveal
           >
-            Engagements from the studio, side by side. Anonymized. Facts only.
+            From the studio&rsquo;s ledger. Anonymized. Facts only.
           </p>
         </div>
 
-        {/* side-by-side ledger entries — one column at 390px */}
+        {/* single ledger entry at reading width — grid returns to two columns
+            when the next shipped system joins it */}
         <div
-          className="mt-16 grid grid-cols-1 gap-5 md:mt-24 md:grid-cols-2 md:gap-6"
+          className="mt-16 grid max-w-[720px] grid-cols-1 gap-5 md:mt-24 md:gap-6"
           data-reveal-stagger
         >
           {ENTRIES.map((e) => (
