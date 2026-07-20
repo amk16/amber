@@ -30,9 +30,9 @@ const ENTRIES = [
     no: 'No. 003',
     field: 'Process',
     client: 'Internal — a family’s filing, run end-to-end.',
-    outcome: 'A government filing that always knows its next step.',
+    outcome: 'A paperwork-heavy process that always knows its next step.',
     body:
-      'A multi-person immigration filing, held as one living system — every form, document, fee, and deadline tracked to done. It knows what’s complete, what’s parked and why, and exactly what each person owes next. People answer questions; the system carries the process.',
+      'A multi-person filing, held as one living system — every form, document, fee, and deadline tracked to done. It knows what’s complete, what’s parked and why, and exactly what each person owes next. People answer questions; the system carries the process.',
     chips: ['Nothing dropped', 'Knows what’s next', 'Multi-person'],
   },
 ]
