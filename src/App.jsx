@@ -108,14 +108,12 @@ export default function App() {
 
         // The cover-slip (amendment 2026-07-21) — the one scripted moment
         // beside the flip, and subordinate to it: the Close header arrives
-        // covered by a slip of the chapter's ink asking the question. On
-        // enter it holds a beat, the question lifts away, and the ink —
-        // sliced into strips — pulls upward at staggered speeds, so the
-        // reveal fills like a cup, the uncovering line rising unevenly.
-        // Once. visibility:hidden in CSS keeps the static page complete.
+        // covered by a slip of the chapter's ink asking the question, holds
+        // a beat, then slides off right to reveal the ask. Once, on enter.
+        // The slip is visibility:hidden in CSS, so without this tween the
+        // header simply stands uncovered.
         const slip = root.current.querySelector('[data-cover-slip]')
         if (slip) {
-          const strips = slip.querySelectorAll('[data-cover-strip]')
           gsap.set(slip, { autoAlpha: 1 })
           gsap
             .timeline({
@@ -125,63 +123,50 @@ export default function App() {
                 once: true,
               },
             })
+            .to(slip, {
+              xPercent: 101,
+              duration: 1.4,
+              ease: 'power3.inOut',
+              delay: 0.6,
+            })
             .to(
-              '[data-cover-text]',
-              { autoAlpha: 0, y: -24, duration: 0.5, ease: 'power2.in' },
-              0.6
-            )
-            .to(
-              strips,
-              {
-                yPercent: -101,
-                // staggered speeds: neighbours drain at different rates
-                duration: (i) => 0.9 + (i % 4) * 0.18,
-                ease: 'power3.inOut',
-                stagger: { each: 0.07, from: 'edges' },
-              },
-              0.85
+              slip.firstElementChild,
+              { xPercent: -10, duration: 1.4, ease: 'power3.inOut' },
+              '<'
             )
             .from(
               '[data-cover-under]',
               { y: 14, duration: 0.8, ease: 'power2.out' },
-              '-=0.9'
+              '-=0.55'
             )
         }
 
-        // The ink pass (2026-07-21) — reveal-tier, not a set-piece: the
-        // accent travels the Foundation header like a proof-reader's pen,
-        // each letter tinting and releasing with a soft trail, and settles
-        // on the word it was always going to choose. The em is accent in
-        // static CSS, so without this tween the end state simply stands.
+        // The ink pass, cup-fill form (2026-07-21) — reveal-tier: each
+        // letter's accent twin fills bottom-up like a cup, at staggered
+        // speeds, accumulating left to right with no dark trailing edge.
+        // Once the line is full, the free letters release together and
+        // only the em word keeps the ink. Overlays are statically clipped
+        // away, so without this tween the resting document simply stands.
         const pass = root.current.querySelector('[data-inkpass]')
         if (pass) {
-          const chars = pass.querySelectorAll('[data-ch]')
-          const free = [...chars].filter((c) => !c.hasAttribute('data-hold'))
-          const hold = pass.querySelectorAll('[data-hold]')
-          gsap.set(hold, { color: 'var(--text)' }) // starts as ink; JS-only
+          const fills = gsap.utils.toArray(pass.querySelectorAll('.ink-fill'))
+          const freeFills = fills.filter(
+            (f) => !f.parentElement.hasAttribute('data-hold')
+          )
           gsap
             .timeline({
               scrollTrigger: { trigger: pass, start: 'top 70%', once: true },
             })
+            .to(fills, {
+              clipPath: 'inset(0% 0% 0% 0%)',
+              duration: () => gsap.utils.random(0.45, 0.95),
+              stagger: 0.05,
+              ease: 'power2.inOut',
+            })
             .to(
-              chars,
-              {
-                color: 'var(--accent-display)',
-                duration: 0.16,
-                stagger: 0.045,
-                ease: 'power1.in',
-              },
-              0
-            )
-            .to(
-              free,
-              {
-                color: 'var(--text)',
-                duration: 0.3,
-                stagger: 0.045,
-                ease: 'power1.out',
-              },
-              0.4
+              freeFills,
+              { autoAlpha: 0, duration: 0.9, ease: 'power2.out' },
+              '+=0.35'
             )
         }
       })

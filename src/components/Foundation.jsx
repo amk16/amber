@@ -7,6 +7,10 @@ const inkChars = (word, hold) =>
   [...word].map((c, i) => (
     <span key={i} data-ch {...(hold ? { 'data-hold': true } : {})}>
       {c}
+      {/* accent twin, statically clipped away — the cup the ink pass fills */}
+      <span className="ink-fill" aria-hidden="true">
+        {c}
+      </span>
     </span>
   ))
 

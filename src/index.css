@@ -517,20 +517,27 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--flip-bg);
   color: var(--flip-text);
   visibility: hidden;
-}
-
-/* The ink, sliced: each strip pulls up at its own pace so the reveal
-   fills like a cup. 10.5% width overlaps a hair to kill seam lines. */
-.cover-strip {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 10.5%;
-  background: var(--flip-bg);
   will-change: transform;
 }
 .cover-slip em {
   color: #b5786d; /* oxblood lifted for ink ground — matches .chapter-dark */
+}
+
+/* The ink pass, cup-fill form (2026-07-21): each header letter carries an
+   accent twin, clipped from the top so it is invisible at rest — GSAP fills
+   it bottom-up like a cup, letters at staggered speeds, cumulative (no dark
+   trailing edge); the free letters release together at the end and only the
+   em word keeps the ink. The resting document never changes. */
+[data-ch] {
+  position: relative;
+}
+.ink-fill {
+  position: absolute;
+  inset: 0;
+  color: var(--accent-display);
+  clip-path: inset(100% 0 0 0);
+  pointer-events: none;
 }
