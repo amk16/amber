@@ -29,12 +29,12 @@ export default function Hero() {
           data-reveal
         >
           <p className="body-copy text-[17px] md:max-w-[52ch]">
-            A brief that researches itself every week. A filing that always
-            knows its next step. A first draft waiting before the day starts.
-            Archon Systems builds systems that carry work like this{' '}
-            <strong>end-to-end</strong>, inside the tools your firm already
-            uses — until the hours your team spends pushing process come back
-            as hours for judgment.
+            Research that runs itself weekly. Filings that never lose their
+            place. First drafts that arrive without being asked. Archon
+            Systems builds <strong>AI workflows</strong> that take these off
+            your team&rsquo;s desk entirely — running end-to-end in the tools
+            your firm already uses, while your people do the work that
+            actually needs them.
           </p>
 
           <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-6">
