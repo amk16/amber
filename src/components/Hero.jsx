@@ -19,9 +19,9 @@ export default function Hero() {
           className="f-display mt-10 text-[clamp(3.4rem,10.5vw,9.25rem)]"
           data-reveal
         >
-          AI systems that do
+          Powerful, reliable,
           <br />
-          the work your team <em>retypes</em>.
+          <em>intelligent</em> systems.
         </h1>
 
         <div
