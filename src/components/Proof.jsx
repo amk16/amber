@@ -65,6 +65,9 @@ export default function Proof() {
           className="mt-16 grid grid-cols-1 gap-5 md:mt-24 md:grid-cols-2 md:gap-6"
           data-reveal-stagger
         >
+          {/* The ground rules sit in the open cell beside Entry No. 003 —
+              moved up from Foundation (2026-07-21) so the terms read right
+              next to the work they govern. */}
           {ENTRIES.map((e) => (
             <article
               key={e.no}
@@ -104,6 +107,21 @@ export default function Proof() {
               </div>
             </article>
           ))}
+
+          <dl className="m-0 self-end p-2 md:p-4" data-reveal-child>
+            {[
+              ['Data', 'Yours, in your own deployment.'],
+              ['Ownership', 'You own your system.'],
+              ['Billing', 'Fixed price. No hourly meter.'],
+            ].map(([k, v]) => (
+              <div key={k} className="spec-row spec-row--lg">
+                <dt className="kicker">{k}</dt>
+                <dd className="f-serif m-0 text-[clamp(1.35rem,2.4vw,1.9rem)] leading-[1.3] text-[var(--text)]">
+                  {v}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
