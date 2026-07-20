@@ -108,12 +108,14 @@ export default function App() {
 
         // The cover-slip (amendment 2026-07-21) — the one scripted moment
         // beside the flip, and subordinate to it: the Close header arrives
-        // covered by a slip of the chapter's ink asking the question, holds
-        // a beat, then slides off right to reveal the ask. Once, on enter.
-        // The slip is visibility:hidden in CSS, so without this tween the
-        // header simply stands uncovered.
+        // covered by a slip of the chapter's ink asking the question. On
+        // enter it holds a beat, the question lifts away, and the ink —
+        // sliced into strips — pulls upward at staggered speeds, so the
+        // reveal fills like a cup, the uncovering line rising unevenly.
+        // Once. visibility:hidden in CSS keeps the static page complete.
         const slip = root.current.querySelector('[data-cover-slip]')
         if (slip) {
+          const strips = slip.querySelectorAll('[data-cover-strip]')
           gsap.set(slip, { autoAlpha: 1 })
           gsap
             .timeline({
@@ -123,21 +125,26 @@ export default function App() {
                 once: true,
               },
             })
-            .to(slip, {
-              xPercent: 101,
-              duration: 1.4,
-              ease: 'power3.inOut',
-              delay: 0.6,
-            })
             .to(
-              slip.firstElementChild,
-              { xPercent: -10, duration: 1.4, ease: 'power3.inOut' },
-              '<'
+              '[data-cover-text]',
+              { autoAlpha: 0, y: -24, duration: 0.5, ease: 'power2.in' },
+              0.6
+            )
+            .to(
+              strips,
+              {
+                yPercent: -101,
+                // staggered speeds: neighbours drain at different rates
+                duration: (i) => 0.9 + (i % 4) * 0.18,
+                ease: 'power3.inOut',
+                stagger: { each: 0.07, from: 'edges' },
+              },
+              0.85
             )
             .from(
               '[data-cover-under]',
               { y: 14, duration: 0.8, ease: 'power2.out' },
-              '-=0.55'
+              '-=0.9'
             )
         }
 

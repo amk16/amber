@@ -517,9 +517,18 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--flip-bg);
   color: var(--flip-text);
   visibility: hidden;
+}
+
+/* The ink, sliced: each strip pulls up at its own pace so the reveal
+   fills like a cup. 10.5% width overlaps a hair to kill seam lines. */
+.cover-strip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10.5%;
+  background: var(--flip-bg);
   will-change: transform;
 }
 .cover-slip em {
