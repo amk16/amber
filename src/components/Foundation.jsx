@@ -19,13 +19,10 @@ export default function Foundation() {
             className="body-copy mx-auto mt-8 max-w-[56ch] text-[16.5px]"
             data-reveal
           >
-            Invention sits at the center of the engineering here. Where
-            traditional practice accepts a limitation — the manual step, the
-            weekly backlog, the report nobody has time to write — we treat it
-            as a design problem, and build the system that ends it. Behind
-            that sits the kind of attention no invoice line covers: a builder
-            whose interest is genuine, and who cannot leave a rough edge
-            alone.
+            Invention is central to our engineering. Where traditional
+            practice accepts a limitation, we treat it as a design problem —
+            and build the system that ends it. Every build carries the
+            attention of engineers with genuine pride in the craft.
           </p>
         </div>
       </div>
