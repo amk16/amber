@@ -1,18 +1,18 @@
 /* Spec rows moved up into Proof's open grid cell (2026-07-21); Foundation is
-   now a single centered statement. The header is split per-character for the
-   ink pass (App.jsx) — screen readers get the aria-label, not the char soup,
-   and the static em color on "engineers." is the animation's end state. */
+   now a single centered statement. The header words are dual-layered for the
+   beam fill (App.jsx): an ink layer plus an accent layer clipped to zero
+   width; the beam animates the clip. Screen readers get the aria-label.
+   Static CSS un-clips the hold word's fill, so the no-JS / reduced-motion
+   document shows the finished state. */
 
-const inkChars = (word, hold) =>
-  [...word].map((c, i) => (
-    <span key={i} data-ch {...(hold ? { 'data-hold': true } : {})}>
-      {c}
-      {/* accent twin, statically clipped away — the cup the ink pass fills */}
-      <span className="ink-fill" aria-hidden="true">
-        {c}
-      </span>
+const beamWord = (word, hold, italic) => (
+  <span className="beam-word" {...(hold ? { 'data-hold': true } : {})}>
+    <span>{italic ? <em>{word}</em> : word}</span>
+    <span className="beam-fill" aria-hidden="true">
+      {italic ? <em>{word}</em> : word}
     </span>
-  ))
+  </span>
+)
 
 const HEADING = ['Led', 'and', 'designed', 'by']
 
@@ -32,15 +32,13 @@ export default function Foundation() {
             aria-label="Led and designed by engineers."
           >
             <span aria-hidden="true">
-              {HEADING.map((w) => (
-                <span key={w} className="inline-block whitespace-nowrap">
-                  {inkChars(w, false)}
+              {HEADING.map((w, i) => (
+                <span key={w}>
+                  {i > 0 && ' '}
+                  {beamWord(w, false, false)}
                 </span>
-              )).reduce((acc, el, i) => (i ? [...acc, ' ', el] : [el]), [])}{' '}
-              <span className="inline-block whitespace-nowrap">
-                <em>{inkChars('engineers', true)}</em>
-                {inkChars('.', true)}
-              </span>
+              ))}{' '}
+              {beamWord('engineers.', true, true)}
             </span>
           </h2>
           <p

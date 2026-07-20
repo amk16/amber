@@ -141,33 +141,41 @@ export default function App() {
             )
         }
 
-        // The ink pass, cup-fill form (2026-07-21) — reveal-tier: each
-        // letter's accent twin fills bottom-up like a cup, at staggered
-        // speeds, accumulating left to right with no dark trailing edge.
-        // Once the line is full, the free letters release together and
-        // only the em word keeps the ink. Overlays are statically clipped
-        // away, so without this tween the resting document simply stands.
+        // The beam fill (reworked 2026-07-21) — reveal-tier: a beam of
+        // accent moves rightward through the Foundation header, filling
+        // each word and draining behind it; the last word fills and holds.
+        // The hold word's fill is statically open in CSS, so without this
+        // tween the finished state simply stands.
         const pass = root.current.querySelector('[data-inkpass]')
         if (pass) {
-          const fills = gsap.utils.toArray(pass.querySelectorAll('.ink-fill'))
-          const freeFills = fills.filter(
-            (f) => !f.parentElement.hasAttribute('data-hold')
-          )
-          gsap
-            .timeline({
-              scrollTrigger: { trigger: pass, start: 'top 70%', once: true },
-            })
-            .to(fills, {
-              clipPath: 'inset(0% 0% 0% 0%)',
-              duration: () => gsap.utils.random(0.45, 0.95),
-              stagger: 0.05,
-              ease: 'power2.inOut',
-            })
-            .to(
-              freeFills,
-              { autoAlpha: 0, duration: 0.9, ease: 'power2.out' },
-              '+=0.35'
+          const CLOSED = 'inset(-10% 100% -10% 0%)'
+          const OPEN = 'inset(-10% 0% -10% 0%)'
+          const DRAINED = 'inset(-10% 0% -10% 100%)'
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: pass, start: 'top 70%', once: true },
+          })
+          let t = 0
+          pass.querySelectorAll('.beam-word').forEach((w) => {
+            const fill = w.querySelector('.beam-fill')
+            const hold = w.hasAttribute('data-hold')
+            gsap.set(fill, { clipPath: CLOSED }) // JS-only; closes the hold word too
+            const inkEm = w.querySelector(':scope > span:first-child em')
+            if (inkEm) gsap.set(inkEm, { color: 'var(--text)' })
+            tl.fromTo(
+              fill,
+              { clipPath: CLOSED },
+              { clipPath: OPEN, duration: 0.38, ease: 'power2.inOut' },
+              t
             )
+            if (!hold) {
+              tl.to(
+                fill,
+                { clipPath: DRAINED, duration: 0.38, ease: 'power2.inOut' },
+                t + 0.3
+              )
+            }
+            t += 0.34
+          })
         }
       })
     },

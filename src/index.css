@@ -526,18 +526,25 @@ body::before {
   color: #b5786d; /* oxblood lifted for ink ground — matches .chapter-dark */
 }
 
-/* The ink pass, cup-fill form (2026-07-21): each header letter carries an
-   accent twin, clipped from the top so it is invisible at rest — GSAP fills
-   it bottom-up like a cup, letters at staggered speeds, cumulative (no dark
-   trailing edge); the free letters release together at the end and only the
-   em word keeps the ink. The resting document never changes. */
-[data-ch] {
+/* The beam fill — Foundation header (reworked 2026-07-21 from the per-letter
+   ink pass). Each word carries an accent layer clipped shut; the beam opens
+   it left-to-right and drains behind. The hold word's fill is statically
+   open, so the no-JS / reduced-motion document shows the finished state. */
+.beam-word {
   position: relative;
+  display: inline-block;
+  white-space: nowrap;
 }
-.ink-fill {
+.beam-word .beam-fill {
   position: absolute;
   inset: 0;
   color: var(--accent-display);
-  clip-path: inset(100% 0 0 0);
+  clip-path: inset(-10% 100% -10% 0%);
   pointer-events: none;
+}
+.beam-word .beam-fill em {
+  color: var(--accent-display);
+}
+.beam-word[data-hold] .beam-fill {
+  clip-path: inset(-10% 0% -10% 0%);
 }
