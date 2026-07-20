@@ -6,7 +6,7 @@
 
 /* Truth amendment 2026-07-20: the legal-drafting entry removed — that engagement
    is still in discovery, and this ledger records only shipped systems (honesty
-   rule, PRODUCT.md). It returns as its own entry the day it ships. */
+   rule, PRODUCT.md). It returns as its own entry (No. 004) the day it ships. */
 const ENTRIES = [
   {
     no: 'No. 001',
@@ -16,6 +16,24 @@ const ENTRIES = [
     body:
       'A whole landscape of sources, read and distilled into a single private brief — the signal, without the search. It keeps itself current, and arrives without anyone lifting a finger.',
     chips: ['Signal, not noise', 'Self-updating', 'Runs unattended'],
+  },
+  {
+    no: 'No. 002',
+    field: 'Method',
+    client: 'Internal — the studio’s method engine, public on GitHub.',
+    outcome: 'A craft’s judgment, written down — extracted from the work itself.',
+    body:
+      'Show it the best work in a field and it studies what the winners actually do — sweeping examples, finding the patterns that repeat, and keeping only what survives repeated evidence. What comes back is a short rulebook you can trust, ranked by confidence, sharper after every sweep.',
+    chips: ['Evidence-ranked', 'Any field', 'Sharpens with use'],
+  },
+  {
+    no: 'No. 003',
+    field: 'Process',
+    client: 'Internal — a family’s filing, run end-to-end.',
+    outcome: 'A government filing that always knows its next step.',
+    body:
+      'A multi-person immigration filing, held as one living system — every form, document, fee, and deadline tracked to done. It knows what’s complete, what’s parked and why, and exactly what each person owes next. People answer questions; the system carries the process.',
+    chips: ['Nothing dropped', 'Knows what’s next', 'Multi-person'],
   },
 ]
 
@@ -42,10 +60,9 @@ export default function Proof() {
           </p>
         </div>
 
-        {/* single ledger entry at reading width — grid returns to two columns
-            when the next shipped system joins it */}
+        {/* side-by-side ledger entries — one column at 390px */}
         <div
-          className="mt-16 grid max-w-[720px] grid-cols-1 gap-5 md:mt-24 md:gap-6"
+          className="mt-16 grid grid-cols-1 gap-5 md:mt-24 md:grid-cols-2 md:gap-6"
           data-reveal-stagger
         >
           {ENTRIES.map((e) => (
