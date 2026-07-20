@@ -29,12 +29,12 @@ export default function Hero() {
           data-reveal
         >
           <p className="body-copy text-[17px] md:max-w-[52ch]">
-            Archon Systems builds AI systems for owner-led firms: intake,
-            drafting, reporting, operations intelligence, inside the tools
-            your firm already uses. The deliverable is a{' '}
-            <strong>written assessment</strong> and the system it describes.
-            This page is typeset like one, so you can judge the work before
-            the call.
+            A brief that researches itself every week. A filing that always
+            knows its next step. A first draft waiting before the day starts.
+            Archon Systems builds systems that carry work like this{' '}
+            <strong>end-to-end</strong>, inside the tools your firm already
+            uses — until the hours your team spends pushing process come back
+            as hours for judgment.
           </p>
 
           <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-6">
