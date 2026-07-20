@@ -140,6 +140,43 @@ export default function App() {
               '-=0.55'
             )
         }
+
+        // The ink pass (2026-07-21) — reveal-tier, not a set-piece: the
+        // accent travels the Foundation header like a proof-reader's pen,
+        // each letter tinting and releasing with a soft trail, and settles
+        // on the word it was always going to choose. The em is accent in
+        // static CSS, so without this tween the end state simply stands.
+        const pass = root.current.querySelector('[data-inkpass]')
+        if (pass) {
+          const chars = pass.querySelectorAll('[data-ch]')
+          const free = [...chars].filter((c) => !c.hasAttribute('data-hold'))
+          const hold = pass.querySelectorAll('[data-hold]')
+          gsap.set(hold, { color: 'var(--text)' }) // starts as ink; JS-only
+          gsap
+            .timeline({
+              scrollTrigger: { trigger: pass, start: 'top 70%', once: true },
+            })
+            .to(
+              chars,
+              {
+                color: 'var(--accent-display)',
+                duration: 0.16,
+                stagger: 0.045,
+                ease: 'power1.in',
+              },
+              0
+            )
+            .to(
+              free,
+              {
+                color: 'var(--text)',
+                duration: 0.3,
+                stagger: 0.045,
+                ease: 'power1.out',
+              },
+              0.4
+            )
+        }
       })
     },
     { scope: root }
