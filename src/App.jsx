@@ -119,25 +119,25 @@ export default function App() {
             .timeline({
               scrollTrigger: {
                 trigger: '[data-cover-wrap]',
-                start: 'top 72%',
+                start: 'top 75%',
                 once: true,
               },
             })
             .to(slip, {
               xPercent: 101,
-              duration: 0.9,
+              duration: 1.4,
               ease: 'power3.inOut',
-              delay: 0.35,
+              delay: 0.6,
             })
             .to(
               slip.firstElementChild,
-              { xPercent: -10, duration: 0.9, ease: 'power3.inOut' },
+              { xPercent: -10, duration: 1.4, ease: 'power3.inOut' },
               '<'
             )
             .from(
               '[data-cover-under]',
-              { y: 14, duration: 0.6, ease: 'power2.out' },
-              '-=0.4'
+              { y: 14, duration: 0.8, ease: 'power2.out' },
+              '-=0.55'
             )
         }
       })

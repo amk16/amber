@@ -26,16 +26,24 @@ export default function Close() {
         </p>
 
         {/* The header arrives covered by the slip; the wipe uncovers it.
-            No data-reveal here: the cover-slip choreography owns this block. */}
-        <div className="relative mt-10 overflow-hidden" data-cover-wrap>
-          <h2
-            className="f-display max-w-[16ch] text-[clamp(3rem,8vw,7.25rem)]"
-            data-cover-under
-          >
-            A single meeting to evaluate your <em>needs</em>.
-          </h2>
+            Full-bleed: the wrapper escapes the 1200px container to the
+            viewport edges (body is overflow-x hidden), the inner div
+            re-centers the header on the grid. No data-reveal here: the
+            cover-slip choreography owns this block. */}
+        <div
+          className="relative mt-10 ml-[calc(50%-50vw)] w-screen overflow-hidden"
+          data-cover-wrap
+        >
+          <div className="mx-auto max-w-[1200px] px-6 md:px-10">
+            <h2
+              className="f-display max-w-[16ch] text-[clamp(3rem,8vw,7.25rem)]"
+              data-cover-under
+            >
+              A single meeting to evaluate your <em>needs</em>.
+            </h2>
+          </div>
           <div className="cover-slip" data-cover-slip aria-hidden="true">
-            <span className="f-display text-[clamp(2.4rem,6.2vw,5.6rem)]">
+            <span className="f-display text-center text-[clamp(2.4rem,6.2vw,5.6rem)]">
               Where Do We <em>Begin</em>?
             </span>
           </div>
