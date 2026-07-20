@@ -22,7 +22,7 @@ export default function Close() {
     <section id="close" className="px-6 py-32 md:px-10 md:py-48">
       <div className="mx-auto max-w-[1200px]">
         <p className="kicker" data-reveal>
-          <b>C/01</b>&ensp;—&ensp;The first meeting
+          <b>C/02</b>&ensp;—&ensp;The first meeting
         </p>
 
         <h2

@@ -13,15 +13,15 @@ const LINES = [
   },
   {
     n: '03',
-    lead: 'The build.',
-    body: 'One workflow, end to end: intake, drafting, reporting, or operations intelligence, inside the tools you already use.',
-    meta: '2–4 wks',
+    lead: 'The blueprint.',
+    body: 'Paid research into your workflow, returned as the full build plan — every checkpoint named and priced, with plain acceptance criteria. Yours to keep.',
+    meta: 'Chk. 0',
   },
   {
     n: '04',
-    lead: 'The price.',
-    body: 'Fixed, agreed before work starts. If it takes longer, that’s our problem.',
-    meta: 'Fixed',
+    lead: 'The build.',
+    body: 'Checkpoint by checkpoint, each shipping something you can see running. Pay when you accept; if a checkpoint takes longer than planned, that’s our problem.',
+    meta: '3–5 chks',
   },
   {
     n: '05',

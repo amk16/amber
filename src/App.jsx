@@ -7,6 +7,7 @@ import Hero from './components/Hero'
 import Method from './components/Method'
 import Proof from './components/Proof'
 import Foundation from './components/Foundation'
+import Price from './components/Price'
 import Close from './components/Close'
 import Footer from './components/Footer'
 import IntakeModal from './components/IntakeModal'
@@ -121,6 +122,7 @@ export default function App() {
             <Proof />
             <Foundation />
           </div>
+          <Price />
           <Close />
         </main>
         <Footer />

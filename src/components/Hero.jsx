@@ -1,8 +1,8 @@
 import { useIntake } from '../intake/IntakeContext'
 
 const META = [
-  ['Price', 'Fixed, agreed before work starts'],
-  ['Build', 'One workflow, live in 2–4 weeks'],
+  ['Price', 'Published — fixed per checkpoint'],
+  ['Build', 'In checkpoints. First one live in ~2 weeks'],
   ['Assessment', 'Written. Yours to keep either way'],
 ]
 
