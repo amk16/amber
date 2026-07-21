@@ -70,8 +70,26 @@ export default function App() {
             })
           })
 
+          // first landing: the period stamps and the underline draws — and
+          // stays. It never leaves the page again; the loop only pulses it.
+          intro
+            .to(
+              stamp,
+              {
+                scale: 1.45,
+                color: 'var(--accent-display)',
+                duration: 0.18,
+                ease: 'power2.out',
+              },
+              '+=0.25'
+            )
+            .to(stamp, { scale: 1, duration: 0.3, ease: 'power2.inOut' })
+            .set(under, { visibility: 'visible', autoAlpha: 1, scaleX: 0 }, '<')
+            .to(under, { scaleX: 1, duration: 0.55, ease: 'power2.inOut' }, '-=0.1')
+            .to(stamp, { color: 'var(--text)', duration: 0.5 }, '+=0.6')
+
           const beat = gsap.timeline({
-            delay: 0.5 + tchars.length * 0.045 + 0.25,
+            delay: 0.5 + tchars.length * 0.045 + 2.6 + 7,
             repeat: -1,
             repeatDelay: 7,
           })
@@ -83,10 +101,9 @@ export default function App() {
               ease: 'power2.out',
             })
             .to(stamp, { scale: 1, duration: 0.3, ease: 'power2.inOut' })
-            .set(under, { visibility: 'visible', autoAlpha: 1, scaleX: 0 }, '<')
-            .to(under, { scaleX: 1, duration: 0.55, ease: 'power2.inOut' }, '-=0.1')
-            .to(stamp, { color: 'var(--text)', duration: 0.5 }, '+=0.6')
-            .to(under, { autoAlpha: 0, duration: 0.5 }, '<')
+            .to(under, { autoAlpha: 0.4, duration: 0.35, ease: 'power2.inOut' }, '<')
+            .to(under, { autoAlpha: 1, duration: 0.45, ease: 'power2.out' })
+            .to(stamp, { color: 'var(--text)', duration: 0.5 }, '+=0.4')
         }
 
         // Quiet reveals: rise ≤ 24px, once. Above-the-fold elements get a
