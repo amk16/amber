@@ -42,7 +42,10 @@ export default function Hero() {
           <br />
           <em className="relative inline-block">
             intelligent
-            <i className="t-under" data-tunder aria-hidden="true" />
+            <i className="t-under" data-tunder aria-hidden="true">
+              <i className="t-under-base" />
+              <i className="t-under-fx" data-tfx />
+            </i>
           </em>{' '}
           systems<span data-tstamp>.</span>
         </h1>

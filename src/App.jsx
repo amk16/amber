@@ -88,22 +88,24 @@ export default function App() {
             .to(under, { scaleX: 1, duration: 0.55, ease: 'power2.inOut' }, '-=0.1')
             .to(stamp, { color: 'var(--text)', duration: 0.5 }, '+=0.6')
 
-          const beat = gsap.timeline({
-            delay: 0.5 + tchars.length * 0.045 + 2.6 + 7,
-            repeat: -1,
-            repeatDelay: 7,
-          })
-          beat
-            .to(stamp, {
-              scale: 1.45,
-              color: 'var(--accent-display)',
-              duration: 0.18,
-              ease: 'power2.out',
-            })
-            .to(stamp, { scale: 1, duration: 0.3, ease: 'power2.inOut' })
-            .to(under, { autoAlpha: 0.4, duration: 0.35, ease: 'power2.inOut' }, '<')
-            .to(under, { autoAlpha: 1, duration: 0.45, ease: 'power2.out' })
-            .to(stamp, { color: 'var(--text)', duration: 0.5 }, '+=0.4')
+          // The underline's loop: the period and caret are done performing —
+          // from here only the line moves. Rest (solid) crossfades into one
+          // of four patterns per cycle, rotating, then yields back to rest.
+          const fxEl = root.current.querySelector('[data-tfx]')
+          const base = under.querySelector('.t-under-base')
+          const FX = ['fx-stagger', 'fx-dots', 'fx-sweep', 'fx-interf']
+          let fi = 0
+          const cycle = () => {
+            fxEl.className = 't-under-fx ' + FX[fi % FX.length]
+            fi += 1
+            gsap
+              .timeline({ onComplete: () => gsap.delayedCall(5.5, cycle) })
+              .to(fxEl, { autoAlpha: 1, duration: 0.5, ease: 'power2.inOut' })
+              .to(base, { autoAlpha: 0, duration: 0.5, ease: 'power2.inOut' }, '<')
+              .to(fxEl, { autoAlpha: 0, duration: 0.6, ease: 'power2.inOut' }, '+=2.4')
+              .to(base, { autoAlpha: 1, duration: 0.6, ease: 'power2.inOut' }, '<')
+          }
+          gsap.delayedCall(0.5 + tchars.length * 0.045 + 2.6 + 5.5, cycle)
         }
 
         // Quiet reveals: rise ≤ 24px, once. Above-the-fold elements get a

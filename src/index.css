@@ -567,10 +567,66 @@ body::before {
   right: 0;
   bottom: -0.06em;
   height: 2px;
-  background: var(--accent-display);
   transform: scaleX(0);
   transform-origin: left;
   visibility: hidden;
+}
+.t-under-base,
+.t-under-fx {
+  position: absolute;
+  inset: 0;
+}
+.t-under-base {
+  background: var(--accent-display);
+}
+/* The underline's loop (2026-07-21): rest = the solid base line; each cycle
+   the fx layer crossfades in carrying one of four patterns, runs a pass,
+   and yields back to rest. Rotation driven from App.jsx. */
+.t-under-fx {
+  opacity: 0;
+  visibility: hidden;
+}
+.t-under-fx.fx-stagger {
+  background: repeating-linear-gradient(90deg,
+    var(--accent-display) 0 12px, transparent 12px 19px);
+  animation: fx-march 1.6s linear infinite;
+}
+@keyframes fx-march {
+  to { background-position: 19px 0; }
+}
+.t-under-fx.fx-dots {
+  top: -4px;
+  bottom: -4px;
+  background:
+    radial-gradient(circle 3.2px at 5px 50%, #a8493f 97%, transparent) 0 0 / 44px 100% repeat-x,
+    linear-gradient(color-mix(in srgb, var(--accent-display) 40%, transparent) 0 0) 0 50% / 100% 1.5px no-repeat;
+  animation: fx-flow 2.4s linear infinite;
+}
+@keyframes fx-flow {
+  to { background-position: 44px 0, 0 50%; }
+}
+.t-under-fx.fx-sweep {
+  top: -1px;
+  bottom: -1px;
+  background: linear-gradient(90deg,
+    var(--accent-display) 0%, var(--accent-display) 32%,
+    #b96a51 44%, #e0997f 50%, #b96a51 56%,
+    var(--accent-display) 68%, var(--accent-display) 100%);
+  background-size: 320% 100%;
+  animation: fx-sweep 2.6s ease-in-out infinite;
+}
+@keyframes fx-sweep {
+  0% { background-position: 115% 0; }
+  60%, 100% { background-position: -15% 0; }
+}
+.t-under-fx.fx-interf {
+  background:
+    repeating-linear-gradient(90deg, var(--accent-display) 0 8px, transparent 8px 16px),
+    repeating-linear-gradient(90deg, #a8493f 0 10px, transparent 10px 20px);
+  animation: fx-interf 2.4s linear infinite;
+}
+@keyframes fx-interf {
+  to { background-position: 16px 0, -20px 0; }
 }
 [data-tstamp] {
   display: inline-block;
