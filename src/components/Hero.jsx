@@ -28,13 +28,21 @@ export default function Hero() {
           className="mt-14 flex flex-col gap-10 md:mt-20 md:flex-row md:items-end md:justify-between"
           data-reveal
         >
-          <p className="body-copy text-[17px] md:max-w-[52ch]">
-            Research that runs itself weekly. Filings that never lose their
-            place. First drafts that arrive without being asked. Archon
-            Systems builds <strong>AI workflows</strong> that take these off
-            your team&rsquo;s desk entirely — running end-to-end in the tools
-            your firm already uses, while your people do the work that
-            actually needs them.
+          {/* The jobs ticking (2026-07-21): each snapshot sentence carries a
+              mark that ignites in sequence while the hero is in view — the
+              systems described are running right now. Marks reserve width
+              always (no reflow) and are invisible in the static document. */}
+          <p className="body-copy text-[17px] md:max-w-[52ch]" data-jobs>
+            <span className="job-mark" aria-hidden="true">◆</span>
+            Research that runs itself weekly.{' '}
+            <span className="job-mark" aria-hidden="true">◆</span>
+            Filings that never lose their place.{' '}
+            <span className="job-mark" aria-hidden="true">◆</span>
+            First drafts that arrive without being asked. Archon Systems
+            builds <strong>AI workflows</strong> that take these off your
+            team&rsquo;s desk entirely — running end-to-end in the tools your
+            firm already uses, while your people do the work that actually
+            needs them.
           </p>
 
           <div className="flex shrink-0 flex-wrap items-center gap-x-8 gap-y-6">

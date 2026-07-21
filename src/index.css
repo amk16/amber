@@ -548,3 +548,15 @@ body::before {
 .beam-word[data-hold] .beam-fill {
   clip-path: inset(-10% 0% -10% 0%);
 }
+
+/* The jobs ticking — hero ambient (2026-07-21). Marks before the three
+   snapshot sentences ignite in sequence; width is always reserved so the
+   text never reflows, and the static document shows no marks at all. */
+.job-mark {
+  display: inline-block;
+  width: 0.85em;
+  font-size: 0.7em;
+  vertical-align: 0.12em;
+  color: var(--accent-display);
+  opacity: 0;
+}

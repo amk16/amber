@@ -177,6 +177,47 @@ export default function App() {
             t += 0.34
           })
         }
+
+        // The jobs ticking (2026-07-21) — hero ambient: the three snapshot
+        // sentences' marks ignite in sequence, dim to a faint middot as the
+        // next takes over, then all fade and the line rests. Runs only while
+        // the hero is on screen; the static document shows no marks.
+        const marks = gsap.utils.toArray('[data-jobs] .job-mark')
+        if (marks.length) {
+          const jobs = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 2.4,
+            paused: true,
+          })
+          marks.forEach((m, i) => {
+            const at = i * 1.8
+            jobs
+              .to(m, { opacity: 1, duration: 0.35, ease: 'power2.out' }, at)
+              .to(
+                m,
+                {
+                  opacity: 0.4,
+                  color: 'var(--text-dim)',
+                  duration: 0.5,
+                  ease: 'power1.out',
+                },
+                at + 1.55
+              )
+          })
+          jobs.to(marks, {
+            opacity: 0,
+            color: 'var(--accent-display)',
+            duration: 0.8,
+            ease: 'power1.inOut',
+            stagger: 0.08,
+          })
+          ScrollTrigger.create({
+            trigger: '#top',
+            start: 'top bottom',
+            end: 'bottom top',
+            onToggle: (self) => (self.isActive ? jobs.play() : jobs.pause()),
+          })
+        }
       })
     },
     { scope: root }
