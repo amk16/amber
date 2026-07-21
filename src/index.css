@@ -549,14 +549,29 @@ body::before {
   clip-path: inset(-10% 0% -10% 0%);
 }
 
-/* The jobs ticking — hero ambient (2026-07-21). Marks before the three
-   snapshot sentences ignite in sequence; width is always reserved so the
-   text never reflows, and the static document shows no marks at all. */
-.job-mark {
+/* The carriage — hero kicker types itself on load (2026-07-21). Caret and
+   underline are dormant statically; the timeline wakes them under
+   no-preference only. */
+.t-caret {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 0;
+  width: 1.5px;
+  background: var(--accent);
+  visibility: hidden;
+}
+.t-under {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.06em;
+  height: 2px;
+  background: var(--accent-display);
+  transform: scaleX(0);
+  transform-origin: left;
+  visibility: hidden;
+}
+[data-tstamp] {
   display: inline-block;
-  width: 0.85em;
-  font-size: 0.7em;
-  vertical-align: 0.12em;
-  color: var(--accent-display);
-  opacity: 0;
 }

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero ambient — four candidates</title>
+<style>
+  /* Ledger tokens, approximated fonts (Newsreader → Georgia for the demo) */
+  :root {
+    --bg: #ecebe6; --text: #1b1917; --dim: #5d574d;
+    --accent: #5f1a1a; --rule: #cdc9bf;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    background: #dedcd4; color: var(--text);
+    font-family: Geist, 'Helvetica Neue', Arial, sans-serif;
+    padding: 28px; min-height: 100vh;
+  }
+  .intro { max-width: 900px; margin: 0 auto 24px; }
+  .intro h1 { font: 400 22px/1.2 Georgia, serif; }
+  .intro p { color: var(--dim); font-size: 13px; margin-top: 6px; }
+  .grid {
+    display: grid; gap: 22px; max-width: 1500px; margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  }
+  .tile { background: var(--bg); border: 1px solid var(--rule); }
+  .tile-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 10px 16px; border-bottom: 1px solid var(--rule);
+    font: 600 10px/1 ui-monospace, monospace; letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .tile-label i { font: italic 400 11px Georgia, serif; letter-spacing: 0; text-transform: none; color: var(--dim); }
+  .hero { padding: 44px 40px 40px; position: relative; overflow: hidden; }
+  .kicker {
+    font: 600 9.5px/1 ui-monospace, monospace; letter-spacing: .17em;
+    text-transform: uppercase; color: var(--dim);
+  }
+  .kicker b { color: var(--text); }
+  h2.headline {
+    font: 400 clamp(38px, 4.6vw, 58px)/0.98 Georgia, serif;
+    letter-spacing: -0.02em; margin-top: 26px;
+  }
+  h2.headline em { font-style: italic; color: var(--accent); position: relative; }
+  .para {
+    margin-top: 26px; max-width: 46ch; font-size: 12.5px; line-height: 1.6;
+    color: var(--dim);
+  }
+  .para strong { color: var(--text); }
+  .cta-row { margin-top: 26px; display: flex; align-items: center; gap: 22px; }
+  .btn {
+    background: var(--accent); color: #f1efe9; border: 0; cursor: default;
+    font: 500 12px/1 inherit; padding: 12px 18px; display: inline-flex; gap: 9px;
+  }
+  .quiet { font-size: 11.5px; color: var(--dim); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ————— A · THE RELAY ————— */
+  /* a bead of current travels the kicker's rule, hands to a second rule
+     drawing itself above the CTA, which lands as a tick on the arrow */
+  .a-rule1 { position: relative; height: 1px; background: var(--rule); margin-top: 12px; }
+  .a-bead {
+    position: absolute; top: -2.5px; left: 0; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%; opacity: 0;
+    animation: a-bead 7s infinite;
+  }
+  @keyframes a-bead {
+    0%, 4% { left: 0; opacity: 0; }
+    8% { opacity: 1; }
+    30% { left: calc(100% - 6px); opacity: 1; }
+    34%, 100% { left: calc(100% - 6px); opacity: 0; }
+  }
+  .a-rule2 { position: relative; height: 1px; background: transparent; margin: 22px 0 0; overflow: hidden; }
+  .a-rule2 i {
+    position: absolute; inset: 0; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    animation: a-draw 7s infinite;
+  }
+  @keyframes a-draw {
+    0%, 30% { transform: scaleX(0); opacity: 1; }
+    46% { transform: scaleX(1); opacity: 1; }
+    58%, 100% { transform: scaleX(1); opacity: 0; }
+  }
+  .a-arr { display: inline-block; animation: a-tick 7s infinite; }
+  @keyframes a-tick {
+    0%, 46% { transform: translateX(0); }
+    52% { transform: translateX(5px); }
+    58%, 100% { transform: translateX(0); }
+  }
+
+  /* ————— B · THE CURRENT ————— */
+  /* the accent word underlines itself, the current jumps to "AI workflows",
+     then arrives at the CTA arrow — headline → promise → ask */
+  .b-em::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    animation: b-under 8s infinite;
+  }
+  @keyframes b-under {
+    0%, 5% { transform: scaleX(0); opacity: 1; }
+    18% { transform: scaleX(1); opacity: 1; }
+    30%, 100% { transform: scaleX(1); opacity: 0; }
+  }
+  .b-strong { animation: b-tint 8s infinite; }
+  @keyframes b-tint {
+    0%, 24% { color: var(--text); }
+    32%, 44% { color: var(--accent); }
+    54%, 100% { color: var(--text); }
+  }
+  .b-arr { display: inline-block; animation: b-tick 8s infinite; }
+  @keyframes b-tick {
+    0%, 50% { transform: translateX(0); }
+    56% { transform: translateX(5px); }
+    62%, 100% { transform: translateX(0); }
+  }
+
+  /* ————— C · THE CARRIAGE ————— */
+  /* a caret sweeps the kicker like a typesetter's carriage, the headline's
+     period stamps as it lands, and the accent word's underline draws */
+  .c-kick { position: relative; display: inline-block; }
+  .c-caret {
+    position: absolute; top: -2px; bottom: -2px; left: 0; width: 1.5px;
+    background: var(--accent); opacity: 0;
+    animation: c-caret 7.5s infinite;
+  }
+  @keyframes c-caret {
+    0%, 3% { left: 0; opacity: 0; }
+    6%, 10% { left: 0; opacity: 1; }
+    26% { left: 100%; opacity: 1; }
+    29%, 100% { left: 100%; opacity: 0; }
+  }
+  .c-period { display: inline-block; animation: c-stamp 7.5s infinite; }
+  @keyframes c-stamp {
+    0%, 27% { transform: scale(1); color: inherit; }
+    30% { transform: scale(1.55); color: var(--accent); }
+    36% { transform: scale(1); color: var(--accent); }
+    48%, 100% { transform: scale(1); color: inherit; }
+  }
+  .c-em::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    animation: c-under 7.5s infinite;
+  }
+  @keyframes c-under {
+    0%, 36% { transform: scaleX(0); opacity: 1; }
+    50% { transform: scaleX(1); opacity: 1; }
+    64%, 100% { transform: scaleX(1); opacity: 0; }
+  }
+
+  /* ————— D · THE MOVEMENT ————— */
+  /* hairline clockwork in the headline's negative space: three arcs at
+     geared speeds (7s / 3.5s / 1.75s) whose accent tips align once per
+     cycle; the center pip acknowledges each alignment */
+  .d-gears {
+    position: absolute; right: 34px; top: 78px; width: 150px; height: 150px;
+    opacity: .9;
+  }
+  .d-arc { position: absolute; border-radius: 50%; border: 1px solid transparent; }
+  .d-arc.o {
+    inset: 0; border-top-color: var(--rule); border-right-color: var(--rule);
+    border-bottom-color: var(--rule);
+    animation: d-spin 7s linear infinite;
+  }
+  .d-arc.m {
+    inset: 24px; border-top-color: var(--rule); border-left-color: var(--rule);
+    animation: d-spin 3.5s linear infinite reverse;
+  }
+  .d-arc.i {
+    inset: 48px; border-top-color: var(--rule); border-right-color: var(--rule);
+    animation: d-spin 1.75s linear infinite;
+  }
+  .d-arc::before {
+    content: ''; position: absolute; top: -3px; left: 50%; margin-left: -2.5px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+  }
+  @keyframes d-spin { to { transform: rotate(360deg); } }
+  .d-pip {
+    position: absolute; left: 50%; top: 50%; width: 5px; height: 5px;
+    margin: -2.5px; border-radius: 50%; background: var(--accent);
+    animation: d-pulse 7s infinite;
+  }
+  @keyframes d-pulse {
+    0% { transform: scale(1); opacity: .5; }
+    3% { transform: scale(2.1); opacity: 1; }
+    12% { transform: scale(1); opacity: .5; }
+    100% { transform: scale(1); opacity: .5; }
+  }
+  @media (max-width: 1100px) { .d-gears { display: none; } }
+</style>
+</head>
+<body>
+  <div class="intro">
+    <h1>Hero ambient — four candidates, running live</h1>
+    <p>Top section only (all visible before scroll). Fonts approximated; production build ports the pick to GSAP with the site's real type. Each loops with a rest; all vanish under reduced motion.</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="tile">
+      <div class="tile-label"><span>A · The relay</span><i>current travels the rules, hands off twice, lands on the ask</i></div>
+      <div class="hero">
+        <p class="kicker"><b>A/01</b>&ensp;—&ensp;Assessment&ensp;·&ensp;Archon Systems</p>
+        <div class="a-rule1"><span class="a-bead"></span></div>
+        <h2 class="headline">Powerful, reliable,<br><em>intelligent</em> systems.</h2>
+        <p class="para">Research that runs itself weekly. Filings that never lose their place. Archon Systems builds <strong>AI workflows</strong> that take these off your team's desk entirely.</p>
+        <div class="a-rule2"><i></i></div>
+        <div class="cta-row"><button class="btn">Book a meeting <span class="a-arr">→</span></button><span class="quiet">Read the method</span></div>
+      </div>
+    </div>
+
+    <div class="tile">
+      <div class="tile-label"><span>B · The current</span><i>headline → promise → ask; three linked pulses</i></div>
+      <div class="hero">
+        <p class="kicker"><b>A/01</b>&ensp;—&ensp;Assessment&ensp;·&ensp;Archon Systems</p>
+        <h2 class="headline">Powerful, reliable,<br><em class="b-em">intelligent</em> systems.</h2>
+        <p class="para">Research that runs itself weekly. Filings that never lose their place. Archon Systems builds <strong class="b-strong">AI workflows</strong> that take these off your team's desk entirely.</p>
+        <div class="cta-row"><button class="btn">Book a meeting <span class="b-arr">→</span></button><span class="quiet">Read the method</span></div>
+      </div>
+    </div>
+
+    <div class="tile">
+      <div class="tile-label"><span>C · The carriage</span><i>the document typesets itself: caret pass, period stamp, underline</i></div>
+      <div class="hero">
+        <p class="kicker c-kick"><b>A/01</b>&ensp;—&ensp;Assessment&ensp;·&ensp;Archon Systems<span class="c-caret"></span></p>
+        <h2 class="headline">Powerful, reliable,<br><em class="c-em">intelligent</em> systems<span class="c-period">.</span></h2>
+        <p class="para">Research that runs itself weekly. Filings that never lose their place. Archon Systems builds <strong>AI workflows</strong> that take these off your team's desk entirely.</p>
+        <div class="cta-row"><button class="btn">Book a meeting <span>→</span></button><span class="quiet">Read the method</span></div>
+      </div>
+    </div>
+
+    <div class="tile">
+      <div class="tile-label"><span>D · The movement</span><i>hairline clockwork at three geared speeds, aligning once per cycle</i></div>
+      <div class="hero">
+        <p class="kicker"><b>A/01</b>&ensp;—&ensp;Assessment&ensp;·&ensp;Archon Systems</p>
+        <h2 class="headline">Powerful, reliable,<br><em>intelligent</em> systems.</h2>
+        <div class="d-gears">
+          <div class="d-arc o"></div>
+          <div class="d-arc m"></div>
+          <div class="d-arc i"></div>
+          <div class="d-pip"></div>
+        </div>
+        <p class="para">Research that runs itself weekly. Filings that never lose their place. Archon Systems builds <strong>AI workflows</strong> that take these off your team's desk entirely.</p>
+        <div class="cta-row"><button class="btn">Book a meeting <span>→</span></button><span class="quiet">Read the method</span></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

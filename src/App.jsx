@@ -38,6 +38,57 @@ export default function App() {
 
       const mm = gsap.matchMedia()
       mm.add('(prefers-reduced-motion: no-preference)', () => {
+        // The carriage (2026-07-21) — the hero's ambient: on load the kicker
+        // types itself, the caret riding the writing edge; the headline's
+        // period stamps as the line lands and the accent word underlines.
+        // The caret then stays blinking (the document is open) while stamp +
+        // underline repeat as a slow loop. Everything is dormant in static
+        // CSS, so without this block the finished document simply stands.
+        const carriage = root.current.querySelector('[data-carriage]')
+        if (carriage) {
+          const tchars = carriage.querySelectorAll('[data-tch]')
+          const caret = carriage.querySelector('[data-tcaret]')
+          const stamp = root.current.querySelector('[data-tstamp]')
+          const under = root.current.querySelector('[data-tunder]')
+          gsap.set(tchars, { autoAlpha: 0 })
+          gsap.set(caret, { visibility: 'visible', autoAlpha: 1 })
+
+          const intro = gsap.timeline({ delay: 0.5 })
+          tchars.forEach((c, i) => {
+            intro.set(c, { autoAlpha: 1 }, i * 0.045)
+            // lazy x: measured when the set fires, after webfonts settle
+            intro.set(caret, { x: () => c.offsetLeft + c.offsetWidth }, i * 0.045)
+          })
+          intro.add(() => {
+            gsap.to(caret, {
+              autoAlpha: 0,
+              duration: 0.55,
+              repeat: -1,
+              yoyo: true,
+              repeatDelay: 0.35,
+              ease: 'power1.inOut',
+            })
+          })
+
+          const beat = gsap.timeline({
+            delay: 0.5 + tchars.length * 0.045 + 0.25,
+            repeat: -1,
+            repeatDelay: 7,
+          })
+          beat
+            .to(stamp, {
+              scale: 1.45,
+              color: 'var(--accent-display)',
+              duration: 0.18,
+              ease: 'power2.out',
+            })
+            .to(stamp, { scale: 1, duration: 0.3, ease: 'power2.inOut' })
+            .set(under, { visibility: 'visible', autoAlpha: 1, scaleX: 0 }, '<')
+            .to(under, { scaleX: 1, duration: 0.55, ease: 'power2.inOut' }, '-=0.1')
+            .to(stamp, { color: 'var(--text)', duration: 0.5 }, '+=0.6')
+            .to(under, { autoAlpha: 0, duration: 0.5 }, '<')
+        }
+
         // Quiet reveals: rise ≤ 24px, once. Above-the-fold elements get a
         // small cascade so the first paint reads as typesetting, not a pop.
         let foldIndex = 0
@@ -175,47 +226,6 @@ export default function App() {
               )
             }
             t += 0.34
-          })
-        }
-
-        // The jobs ticking (2026-07-21) — hero ambient: the three snapshot
-        // sentences' marks ignite in sequence, dim to a faint middot as the
-        // next takes over, then all fade and the line rests. Runs only while
-        // the hero is on screen; the static document shows no marks.
-        const marks = gsap.utils.toArray('[data-jobs] .job-mark')
-        if (marks.length) {
-          const jobs = gsap.timeline({
-            repeat: -1,
-            repeatDelay: 2.4,
-            paused: true,
-          })
-          marks.forEach((m, i) => {
-            const at = i * 1.8
-            jobs
-              .to(m, { opacity: 1, duration: 0.35, ease: 'power2.out' }, at)
-              .to(
-                m,
-                {
-                  opacity: 0.4,
-                  color: 'var(--text-dim)',
-                  duration: 0.5,
-                  ease: 'power1.out',
-                },
-                at + 1.55
-              )
-          })
-          jobs.to(marks, {
-            opacity: 0,
-            color: 'var(--accent-display)',
-            duration: 0.8,
-            ease: 'power1.inOut',
-            stagger: 0.08,
-          })
-          ScrollTrigger.create({
-            trigger: '#top',
-            start: 'top bottom',
-            end: 'bottom top',
-            onToggle: (self) => (self.isActive ? jobs.play() : jobs.pause()),
           })
         }
       })
